@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>안전자료 공유실</title>
+<meta name="description" content="산업안전보건법 · 중대재해처벌법 실무 양식, 점검표, 교육자료 공유실">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;
+--bg:light-dark(#eaf4fb,#0f1a22);--panel:light-dark(#ffffff,#16242e);--ink:light-dark(#111111,#eef3f6);
+--sub:light-dark(#4a5560,#a9b6bf);--line:light-dark(#c9dcea,#2a3d4a);--sky:light-dark(#cfe6f6,#1f3a4d);
+--yel:#ffd400;--org:light-dark(#c45a00,#ffa04d);--focus:light-dark(#0b5cad,#7cc0ff)}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Noto Sans KR",system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(20px,3vw,40px) max(5vw,16px);max-width:1240px;margin:0 auto}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.1;margin:0 0 6px}
+.lead{color:var(--sub);margin:0;max-width:62ch}
+.top{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between}
+.meter{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;min-width:200px}
+.meter b{font-size:22px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 12px}
+input,select,button{font:inherit;font-size:16px;color:var(--ink)}
+input[type=search],select{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:44px}
+input[type=search]{flex:1 1 260px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 14px;min-height:44px;cursor:pointer}
+.tab[aria-pressed=true]{background:var(--yel);border-color:var(--yel);color:#111;font-weight:700}
+.tab small{opacity:.7;margin-left:4px}
+.list{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-top:14px}
+.row{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.kind{font-size:13px;font-weight:700;text-align:center;border:1px solid var(--line);border-radius:6px;padding:6px 0;background:var(--sky)}
+.t{font-weight:700;margin:0;overflow-wrap:anywhere}
+.m{font-size:13px;color:var(--sub);margin:2px 0 0}
+.m span+span::before{content:" · "}
+.d{font-size:14px;margin:4px 0 0;color:var(--sub)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:8px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;white-space:nowrap}
+.empty{padding:36px 16px;text-align:center;color:var(--sub)}
+.notice{border:1px solid var(--org);color:var(--org);border-radius:10px;padding:12px 16px;font-size:14px;margin-top:22px;background:var(--panel)}
+footer{font-size:13px;color:var(--sub);line-height:1.7}
+@media(max-width:600px){.row{grid-template-columns:52px minmax(0,1fr)}.row .btn{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<main class="band">
+  <div class="top">
+    <div>
+      <h1>안전자료 공유실</h1>
+      <p class="lead">산업안전보건법 · 중대재해처벌법 실무에 쓰는 양식, 점검표, 교육자료를 분류별로 모았습니다. 누구나 무료로 열람 · 다운로드할 수 있습니다.</p>
+    </div>
+    <div class="meter"><span class="m">등록 자료</span><br><b id="cnt">–</b></div>
+  </div>
+  <div class="tools">
+    <input type="search" id="q" placeholder="자료명 · 설명 검색 (예: 위험성평가)" aria-label="검색">
+    <select id="ind" aria-label="업종"><option value="">전체 업종</option><option>공통</option><option>제조</option><option>건설</option></select>
+    <select id="sort" aria-label="정렬"><option value="new">최신순</option><option value="name">이름순</option></select>
+  </div>
+  <div class="tabs" id="tabs" role="toolbar" aria-label="분류"></div>
+  <div class="list" id="list"><div class="empty">자료 목록을 불러오는 중입니다…</div></div>
+  <p class="notice">법령 관련 자료는 작성일 기준입니다. 사용 전 국가법령정보센터 현행 조문과 안전보건공단 안전보건법령 스마트검색으로 대조하시기 바랍니다.</p>
+  <footer class="band" style="padding-inline:0">
+    한국재해예방관리원(주) · 노동부지정 재해예방전문기관 · 안전관리전문기관<br>
+    블로그: <a href="https://blog.naver.com/safeplum" target="_blank" rel="noopener">blog.naver.com/safeplum</a>
+  </footer>
+</main>
+<script>
+{
+const CATS=["법령 · 중처법","위험성평가 · JSA","유해위험방지계획서","교육자료","점검표 · 서식","사고사례","기타"];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let rows=[],cat="전체";
+function render(){
+  const n=c=>c==="전체"?rows.length:rows.filter(r=>r.category===c).length;
+  $("#tabs").innerHTML=["전체",...CATS].map(c=>`<button class="tab" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(c)}<small>${n(c)}</small></button>`).join("");
+  const q=$("#q").value.trim().toLowerCase(),ind=$("#ind").value;
+  let v=rows.filter(r=>(cat==="전체"||r.category===cat)&&(!ind||r.industry===ind)&&(!q||(r.title+" "+(r.desc||"")).toLowerCase().includes(q)));
+  v.sort($("#sort").value==="name"?(a,b)=>a.title.localeCompare(b.title,"ko"):(a,b)=>(b.date||"").localeCompare(a.date||""));
+  $("#cnt").textContent=rows.length+"건";
+  $("#list").innerHTML=v.length?v.map(r=>`<div class="row"><div class="kind">${esc(r.type||"파일")}</div><div>
+    <p class="t">${esc(r.title)}</p><p class="m"><span>${esc(r.category)}</span><span>${esc(r.industry)}</span><span>${esc(r.date)}</span></p>
+    ${r.desc?`<p class="d">${esc(r.desc)}</p>`:""}</div>
+    <a class="btn" href="${esc(r.file||r.link)}" target="_blank" rel="noopener">열기</a></div>`).join("")
+    :`<div class="empty">${rows.length?"조건에 맞는 자료가 없습니다.":"아직 등록된 자료가 없습니다."}</div>`;
+}
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(b){cat=b.dataset.c;render()}});
+["#q","#ind","#sort"].forEach(s=>$(s).addEventListener("input",render));
+fetch("files.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{rows=d;render()})
+  .catch(()=>{$("#list").innerHTML='<div class="empty">목록을 불러오지 못했습니다. 잠시 후 다시 열어 주세요.</div>'});
+}
+</script>
+</body>
+</html>
