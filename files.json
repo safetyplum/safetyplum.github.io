@@ -1,659 +1,75 @@
 [
- {
-  "title": "산업안전보건법 · 중대재해처벌법 핵심정리 (교육용 PPT)",
-  "category": "교육자료",
-  "industry": "공통",
-  "date": "2026-11-21",
-  "desc": "두 법 비교, 역할 체계, 산안법 공통 의무, 중처법 9개 항목, 2026년 변동사항 12장. 2026.11 기준, 현행 조문 대조 필요.",
-  "file": "files/261121_common_sanan_jungcheo_summary.pdf",
-  "type": "PDF"
- },
- {
-  "title": "안전경영책임계획 – 산안법 · 중처법 연계안",
-  "category": "법령 · 중처법",
-  "industry": "공통",
-  "date": "2026-11-21",
-  "desc": "공공기관 안전경영책임계획 목차 9개 항목별 연계 조문 · 작성 내용 · 증빙, 연간 일정.",
-  "file": "files/261121_common_safety_plan_link.pdf",
-  "type": "PDF"
- },
- {
-  "title": "비상대응 시나리오 ① 안전사고",
-  "category": "사고사례",
-  "industry": "공통",
-  "date": "2026-11-12",
-  "desc": "안전사고 발생 시 신고·구호·보고 단계별 비상대응 시나리오 (PPT를 PDF로 변환)",
-  "file": "files/2611_emergency_01_accident.pdf",
-  "type": "PDF"
- },
- {
-  "title": "비상대응 시나리오 ② 화재·폭발",
-  "category": "사고사례",
-  "industry": "공통",
-  "date": "2026-11-12",
-  "desc": "화재·폭발 상황 비상대응 시나리오 (PPT를 PDF로 변환)",
-  "file": "files/2611_emergency_02_fire.pdf",
-  "type": "PDF"
- },
- {
-  "title": "비상대응 시나리오 ③ 톨루엔 누출·화재",
-  "category": "사고사례",
-  "industry": "제조",
-  "date": "2026-11-12",
-  "desc": "화학물질(톨루엔) 누출·화재 비상대응 시나리오 (PPT를 PDF로 변환)",
-  "file": "files/2611_emergency_03_toluene.pdf",
-  "type": "PDF"
- },
- {
-  "title": "비상대응 시나리오 ④ 현장 추락",
-  "category": "사고사례",
-  "industry": "건설",
-  "date": "2026-11-12",
-  "desc": "건설현장 추락사고 비상대응 시나리오 (PPT를 PDF로 변환)",
-  "file": "files/2611_emergency_04_fall.pdf",
-  "type": "PDF"
- },
- {
-  "title": "비상대응 시나리오 ⑤ 끼임",
-  "category": "사고사례",
-  "industry": "제조",
-  "date": "2026-11-12",
-  "desc": "제조업 끼임사고 비상대응 시나리오 (PPT를 PDF로 변환)",
-  "file": "files/2611_emergency_05_caught.pdf",
-  "type": "PDF"
- },
- {
-  "title": "중대재해 기관별 대응 준비서류",
-  "category": "법령 · 중처법",
-  "industry": "공통",
-  "date": "2026-11-13",
-  "desc": "중대재해 발생 시 노동부·경찰·공단 등 기관별 대응과 준비서류 (PPT를 PDF로 변환)",
-  "file": "files/2611_serious_accident_agency_docs.pdf",
-  "type": "PDF"
- },
- {
-  "title": "협력업체 사망사고 – 원청 책임 사례분석",
-  "category": "법령 · 중처법",
-  "industry": "공통",
-  "date": "2026-11-17",
-  "desc": "협력업체 사망사고가 원청에 미치는 영향과 사례 (PPT를 PDF로 변환)",
-  "file": "files/2611_contractor_fatality_cases.pdf",
-  "type": "PDF"
- },
- {
-  "title": "안전관련기관 사망사고와 중처법 적용",
-  "category": "법령 · 중처법",
-  "industry": "공통",
-  "date": "2026-11-18",
-  "desc": "공공·안전관련기관 사망사고와 중대재해처벌법 적용 (PPT를 PDF로 변환)",
-  "file": "files/2611_safety_agency_fatality.pdf",
-  "type": "PDF"
- },
- {
-  "title": "관리감독자 중처법 처벌사례 50장",
-  "category": "교육자료",
-  "industry": "공통",
-  "date": "2026-11-18",
-  "desc": "관리감독자 대상 처벌사례 중심 교육자료 (PPT를 PDF로 변환)",
-  "file": "files/2611_supervisor_penalty_cases_50.pdf",
-  "type": "PDF"
- },
- {
-  "title": "관리감독자 중대재해처벌법 교육자료 50장 (제조)",
-  "category": "교육자료",
-  "industry": "제조",
-  "date": "2026-11-18",
-  "desc": "제조업 관리감독자 교육용 (PPT를 PDF로 변환)",
-  "file": "files/2611_supervisor_edu_manufacturing_50.pdf",
-  "type": "PDF"
- },
- {
-  "title": "관리감독자 중대재해처벌법 교육자료 50장 (건설)",
-  "category": "교육자료",
-  "industry": "건설",
-  "date": "2026-11-18",
-  "desc": "건설업 관리감독자 교육용 (PPT를 PDF로 변환)",
-  "file": "files/2611_supervisor_edu_construction_50.pdf",
-  "type": "PDF"
- },
- {
-  "title": "중대재해예방 자율점검 매뉴얼",
-  "category": "점검표 · 서식",
-  "industry": "공통",
-  "date": "2026-11-04",
-  "desc": "중대재해 예방을 위한 자율점검 매뉴얼 요약 (PPT를 PDF로 변환)",
-  "file": "files/2611_self_check_manual.pdf",
-  "type": "PDF"
- },
- {
-  "title": "원·하청 협력안전관리 가이드북",
-  "category": "법령 · 중처법",
-  "industry": "공통",
-  "date": "2026-11-04",
-  "desc": "원청·하청 협력 안전관리 요약 (PPT를 PDF로 변환)",
-  "file": "files/2611_subcontract_guidebook.pdf",
-  "type": "PDF"
- },
- {
-  "title": "중대산업재해 대응절차서",
-  "category": "법령 · 중처법",
-  "industry": "공통",
-  "date": "2026-11-04",
-  "desc": "중대산업재해 발생 시 대응 절차 (PPT를 PDF로 변환)",
-  "file": "files/2611_response_procedure.pdf",
-  "type": "PDF"
- },
- {
-  "title": "중대재해처벌법 대응실무책임자 과정",
-  "category": "교육자료",
-  "industry": "공통",
-  "date": "2026-11-04",
-  "desc": "대응 실무책임자 교육 과정 요약 (PPT를 PDF로 변환)",
-  "file": "files/2611_response_officer_course.pdf",
-  "type": "PDF"
- },
- {
-  "title": "중대재해처벌법 핵심 체크포인트",
-  "category": "법령 · 중처법",
-  "industry": "공통",
-  "date": "2026-11-04",
-  "desc": "경영책임자 의무 핵심 점검 사항 (PPT를 PDF로 변환)",
-  "file": "files/2611_key_checkpoints.pdf",
-  "type": "PDF"
- },
- {
-  "title": "중소기업 안전관리 가이드북",
-  "category": "교육자료",
-  "industry": "공통",
-  "date": "2026-11-04",
-  "desc": "중소기업 안전관리 기본 가이드 (PPT를 PDF로 변환)",
-  "file": "files/2611_sme_guidebook.pdf",
-  "type": "PDF"
- },
- {
-  "title": "건설기술진흥법 벌점 · 행정처분 사례 근로자교육",
-  "category": "교육자료",
-  "industry": "건설",
-  "date": "2026-11-21",
-  "desc": "건진법 벌점·행정처분 사례 중심 근로자 교육 (PPT를 PDF로 변환)",
-  "file": "files/2611_construction_penalty_points.pdf",
-  "type": "PDF"
- },
- {
-  "title": "사다리 · 말비계 추락예방 교육",
-  "category": "교육자료",
-  "industry": "공통",
-  "date": "2026-11-20",
-  "desc": "이동식 사다리·말비계 추락예방 교육자료 (PPT를 PDF로 변환)",
-  "file": "files/2611_ladder_fall_prevention.pdf",
-  "type": "PDF"
- },
- {
-  "title": "산업재해 최신 법령 교육",
-  "category": "교육자료",
-  "industry": "공통",
-  "date": "2026-11-20",
-  "desc": "최근 개정 법령 중심 교육자료 (PPT를 PDF로 변환)",
-  "file": "files/2611_latest_law_edu.pdf",
-  "type": "PDF"
- },
- {
-  "title": "안전작업허가(PTW) 운영 실무 (제조)",
-  "category": "점검표 · 서식",
-  "industry": "제조",
-  "date": "2026-11-20",
-  "desc": "제조업 안전작업허가제 운영 방법 (PPT를 PDF로 변환)",
-  "file": "files/2611_ptw_manufacturing.pdf",
-  "type": "PDF"
- },
- {
-  "title": "사전작업허가제(PTW) 운영 실무 (건설)",
-  "category": "점검표 · 서식",
-  "industry": "건설",
-  "date": "2026-11-20",
-  "desc": "건설현장 사전작업허가제 운영 방법 (PPT를 PDF로 변환)",
-  "file": "files/2611_ptw_construction.pdf",
-  "type": "PDF"
- },
- {
-  "title": "공사관계자 안전업무 가이드북 핵심정리",
-  "category": "교육자료",
-  "industry": "건설",
-  "date": "2026-11-19",
-  "desc": "발주·설계·시공·감리 관계자별 안전업무 요약 (PPT를 PDF로 변환)",
-  "file": "files/2611_construction_guidebook.pdf",
-  "type": "PDF"
- },
- {
-  "title": "산업재해 · 안전보건 정기 업데이트",
-  "category": "법령 · 중처법",
-  "industry": "공통",
-  "date": "2026-11-19",
-  "desc": "최근 산업재해·법령 동향 정기 정리 (PPT를 PDF로 변환)",
-  "file": "files/2611_periodic_update.pdf",
-  "type": "PDF"
- },
- {
-  "title": "도급업체 안전관리 (제조)",
-  "category": "법령 · 중처법",
-  "industry": "제조",
-  "date": "2026-11-09",
-  "desc": "제조업 도급·수급업체 안전관리 (PPT를 PDF로 변환)",
-  "file": "files/2611_contractor_safety_manufacturing.pdf",
-  "type": "PDF"
- },
- {
-  "title": "1인 안전관리자 중대재해예방 교육자료",
-  "category": "교육자료",
-  "industry": "공통",
-  "date": "2026-10-03",
-  "desc": "1인 안전관리자용 중대재해 예방 교육 (PPT를 PDF로 변환)",
-  "file": "files/2610_solo_manager_edu.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 1. 고압실작업 교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_01.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 2. 가스용접용단 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_02.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 3. 밀폐장소용접 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_03.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 4. 위험물취급 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_04.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 5. 가스발생장치 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_05.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 6. 반응기교반기 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_06.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 7. 화학설비탱크내작업 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_07.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 8. 호퍼저장탱크 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_08.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 9. 건조설비 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_09.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 12. 목재가공기계 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_12.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 15. 건설용리프트곤돌라 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_15.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 16. 주물단조 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_16.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 18. 콘크리트파쇄기 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_18.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 19. 지반굴착 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_19.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 20. 흙막이지보공 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_20.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 21. 터널굴착 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_21.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 22. 암석굴착 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_22.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 23. 2m 이상 적재해체 교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_23.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 24. 선박하역 교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_24.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 25. 거푸집동바리 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_25.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 26. 비계조립해체 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_26.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 27. 철골조립해체 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_27.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 28. 목조건축물 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_28.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 29. 콘크리트구조물해체 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_29.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 30. 타워크레인설치해체 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_30.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 31. 보일러 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_31.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 32. 압력용기 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_32.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 35. 관리대상유해물질 교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_35.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 36. 로봇작업 교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_36.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 37. 석면해체제거 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_37.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 39. 타워크레인신호 교안",
-  "category": "특별교육",
-  "industry": "건설",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_39.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 밀폐공간 통합교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 통합 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_confined.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 크레인 통합교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 통합 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_crane.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 프레스 통합교안",
-  "category": "특별교육",
-  "industry": "제조",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 통합 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_press.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 하역운반기계 통합교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-17",
-  "desc": "특별안전보건교육 통합 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_handling.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 공통내용 교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-18",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_00.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 10. 집재장치 교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-18",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_10.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 17. 정전활선작업 교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-18",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_17.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 33. 방사선업무 교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-18",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_33.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 38. 화재위험작업 교안",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-18",
-  "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_38.pdf",
-  "type": "PDF"
- },
- {
-  "title": "특별교육 대상 작업순서 · 위험성평가 (39종)",
-  "category": "특별교육",
-  "industry": "공통",
-  "date": "2026-10-19",
-  "desc": "39개 대상 작업별 작업순서·유해위험요인·안전점검·위험성평가 요약 (PPT를 PDF로 변환)",
-  "file": "files/2610_special_39_risk.pdf",
-  "type": "PDF"
- },
- {
-  "title": "1인 안전관리자 법정 주기 업무 캘린더 (2026 개정 반영)",
-  "category": "점검표 · 서식",
-  "industry": "공통",
-  "date": "2026-10-25",
-  "desc": "일·월·분기·반기·연 주기별 법정 업무와 증빙 정리 (공통·제조·건설) (PPT를 PDF로 변환)",
-  "file": "files/2610_solo_manager_calendar.pdf",
-  "type": "PDF"
- },
- {
-  "title": "유해위험기계 안전인증·자율안전확인 (제조업 50장)",
-  "category": "교육자료",
-  "industry": "제조",
-  "date": "2026-11-22",
-  "desc": "안전인증·자율안전확인신고·안전검사 비교, 프레스·크레인·연삭기·로봇 등 기계별 위험성 예방대책 (PPT를 PDF로 변환)",
-  "file": "files/261122_manufacturing_certification_50.pdf",
-  "type": "PDF"
- },
- {
-  "title": "건설장비·가설기자재 안전인증·자율안전확인 (건설업 50장)",
-  "category": "교육자료",
-  "industry": "건설",
-  "date": "2026-11-22",
-  "desc": "장비 반입 관리, 타워크레인·리프트·고소작업대·비계·안전대 등 위험성 예방대책 (PPT를 PDF로 변환)",
-  "file": "files/261122_construction_certification_50.pdf",
-  "type": "PDF"
- },
- {
-  "title": "안전 기본수칙과 보건관리 (공통 50장)",
-  "category": "교육자료",
-  "industry": "공통",
-  "date": "2026-11-22",
-  "desc": "기계·기구 기본수칙 + 유해물질·소음·폭염·밀폐공간·근골격계·건강진단 (PPT를 PDF로 변환)",
-  "file": "files/261122_common_health_basics_50.pdf",
-  "type": "PDF"
- }
+{"title": "산업안전보건법 · 중대재해처벌법 핵심정리 (교육용 PPT)", "category": "교육자료", "industry": "공통", "date": "2026-11-21", "desc": "두 법 비교, 역할 체계, 산안법 공통 의무, 중처법 9개 항목, 2026년 변동사항 12장. 2026.11 기준, 현행 조문 대조 필요.", "file": "files/261121_common_sanan_jungcheo_summary.pdf", "type": "PDF"},
+{"title": "안전경영책임계획 – 산안법 · 중처법 연계안", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-21", "desc": "공공기관 안전경영책임계획 목차 9개 항목별 연계 조문 · 작성 내용 · 증빙, 연간 일정.", "file": "files/261121_common_safety_plan_link.pdf", "type": "PDF"},
+{"title": "비상대응 시나리오 ① 안전사고", "category": "사고사례", "industry": "공통", "date": "2026-11-12", "desc": "안전사고 발생 시 신고·구호·보고 단계별 비상대응 시나리오 (PPT를 PDF로 변환)", "file": "files/2611_emergency_01_accident.pdf", "type": "PDF"},
+{"title": "비상대응 시나리오 ② 화재·폭발", "category": "사고사례", "industry": "공통", "date": "2026-11-12", "desc": "화재·폭발 상황 비상대응 시나리오 (PPT를 PDF로 변환)", "file": "files/2611_emergency_02_fire.pdf", "type": "PDF"},
+{"title": "비상대응 시나리오 ③ 톨루엔 누출·화재", "category": "사고사례", "industry": "제조", "date": "2026-11-12", "desc": "화학물질(톨루엔) 누출·화재 비상대응 시나리오 (PPT를 PDF로 변환)", "file": "files/2611_emergency_03_toluene.pdf", "type": "PDF"},
+{"title": "비상대응 시나리오 ④ 현장 추락", "category": "사고사례", "industry": "건설", "date": "2026-11-12", "desc": "건설현장 추락사고 비상대응 시나리오 (PPT를 PDF로 변환)", "file": "files/2611_emergency_04_fall.pdf", "type": "PDF"},
+{"title": "비상대응 시나리오 ⑤ 끼임", "category": "사고사례", "industry": "제조", "date": "2026-11-12", "desc": "제조업 끼임사고 비상대응 시나리오 (PPT를 PDF로 변환)", "file": "files/2611_emergency_05_caught.pdf", "type": "PDF"},
+{"title": "중대재해 기관별 대응 준비서류", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-13", "desc": "중대재해 발생 시 노동부·경찰·공단 등 기관별 대응과 준비서류 (PPT를 PDF로 변환)", "file": "files/2611_serious_accident_agency_docs.pdf", "type": "PDF"},
+{"title": "협력업체 사망사고 – 원청 책임 사례분석", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-17", "desc": "협력업체 사망사고가 원청에 미치는 영향과 사례 (PPT를 PDF로 변환)", "file": "files/2611_contractor_fatality_cases.pdf", "type": "PDF"},
+{"title": "안전관련기관 사망사고와 중처법 적용", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-18", "desc": "공공·안전관련기관 사망사고와 중대재해처벌법 적용 (PPT를 PDF로 변환)", "file": "files/2611_safety_agency_fatality.pdf", "type": "PDF"},
+{"title": "관리감독자 중처법 처벌사례 50장", "category": "교육자료", "industry": "공통", "date": "2026-11-18", "desc": "관리감독자 대상 처벌사례 중심 교육자료 (PPT를 PDF로 변환)", "file": "files/2611_supervisor_penalty_cases_50.pdf", "type": "PDF"},
+{"title": "관리감독자 중대재해처벌법 교육자료 50장 (제조)", "category": "교육자료", "industry": "제조", "date": "2026-11-18", "desc": "제조업 관리감독자 교육용 (PPT를 PDF로 변환)", "file": "files/2611_supervisor_edu_manufacturing_50.pdf", "type": "PDF"},
+{"title": "관리감독자 중대재해처벌법 교육자료 50장 (건설)", "category": "교육자료", "industry": "건설", "date": "2026-11-18", "desc": "건설업 관리감독자 교육용 (PPT를 PDF로 변환)", "file": "files/2611_supervisor_edu_construction_50.pdf", "type": "PDF"},
+{"title": "중대재해예방 자율점검 매뉴얼", "category": "점검표 · 서식", "industry": "공통", "date": "2026-11-04", "desc": "중대재해 예방을 위한 자율점검 매뉴얼 요약 (PPT를 PDF로 변환)", "file": "files/2611_self_check_manual.pdf", "type": "PDF"},
+{"title": "원·하청 협력안전관리 가이드북", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-04", "desc": "원청·하청 협력 안전관리 요약 (PPT를 PDF로 변환)", "file": "files/2611_subcontract_guidebook.pdf", "type": "PDF"},
+{"title": "중대산업재해 대응절차서", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-04", "desc": "중대산업재해 발생 시 대응 절차 (PPT를 PDF로 변환)", "file": "files/2611_response_procedure.pdf", "type": "PDF"},
+{"title": "중대재해처벌법 대응실무책임자 과정", "category": "교육자료", "industry": "공통", "date": "2026-11-04", "desc": "대응 실무책임자 교육 과정 요약 (PPT를 PDF로 변환)", "file": "files/2611_response_officer_course.pdf", "type": "PDF"},
+{"title": "중대재해처벌법 핵심 체크포인트", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-04", "desc": "경영책임자 의무 핵심 점검 사항 (PPT를 PDF로 변환)", "file": "files/2611_key_checkpoints.pdf", "type": "PDF"},
+{"title": "중소기업 안전관리 가이드북", "category": "교육자료", "industry": "공통", "date": "2026-11-04", "desc": "중소기업 안전관리 기본 가이드 (PPT를 PDF로 변환)", "file": "files/2611_sme_guidebook.pdf", "type": "PDF"},
+{"title": "건설기술진흥법 벌점 · 행정처분 사례 근로자교육", "category": "교육자료", "industry": "건설", "date": "2026-11-21", "desc": "건진법 벌점·행정처분 사례 중심 근로자 교육 (PPT를 PDF로 변환)", "file": "files/2611_construction_penalty_points.pdf", "type": "PDF"},
+{"title": "사다리 · 말비계 추락예방 교육", "category": "교육자료", "industry": "공통", "date": "2026-11-20", "desc": "이동식 사다리·말비계 추락예방 교육자료 (PPT를 PDF로 변환)", "file": "files/2611_ladder_fall_prevention.pdf", "type": "PDF"},
+{"title": "산업재해 최신 법령 교육", "category": "교육자료", "industry": "공통", "date": "2026-11-20", "desc": "최근 개정 법령 중심 교육자료 (PPT를 PDF로 변환)", "file": "files/2611_latest_law_edu.pdf", "type": "PDF"},
+{"title": "안전작업허가(PTW) 운영 실무 (제조)", "category": "점검표 · 서식", "industry": "제조", "date": "2026-11-20", "desc": "제조업 안전작업허가제 운영 방법 (PPT를 PDF로 변환)", "file": "files/2611_ptw_manufacturing.pdf", "type": "PDF"},
+{"title": "사전작업허가제(PTW) 운영 실무 (건설)", "category": "점검표 · 서식", "industry": "건설", "date": "2026-11-20", "desc": "건설현장 사전작업허가제 운영 방법 (PPT를 PDF로 변환)", "file": "files/2611_ptw_construction.pdf", "type": "PDF"},
+{"title": "공사관계자 안전업무 가이드북 핵심정리", "category": "교육자료", "industry": "건설", "date": "2026-11-19", "desc": "발주·설계·시공·감리 관계자별 안전업무 요약 (PPT를 PDF로 변환)", "file": "files/2611_construction_guidebook.pdf", "type": "PDF"},
+{"title": "산업재해 · 안전보건 정기 업데이트", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-19", "desc": "최근 산업재해·법령 동향 정기 정리 (PPT를 PDF로 변환)", "file": "files/2611_periodic_update.pdf", "type": "PDF"},
+{"title": "도급업체 안전관리 (제조)", "category": "법령 · 중처법", "industry": "제조", "date": "2026-11-09", "desc": "제조업 도급·수급업체 안전관리 (PPT를 PDF로 변환)", "file": "files/2611_contractor_safety_manufacturing.pdf", "type": "PDF"},
+{"title": "1인 안전관리자 중대재해예방 교육자료", "category": "교육자료", "industry": "공통", "date": "2026-10-03", "desc": "1인 안전관리자용 중대재해 예방 교육 (PPT를 PDF로 변환)", "file": "files/2610_solo_manager_edu.pdf", "type": "PDF"},
+{"title": "특별교육 1. 고압실작업 교안", "category": "특별교육", "industry": "공통", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_01.pdf", "type": "PDF"},
+{"title": "특별교육 2. 가스용접용단 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_02.pdf", "type": "PDF"},
+{"title": "특별교육 3. 밀폐장소용접 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_03.pdf", "type": "PDF"},
+{"title": "특별교육 4. 위험물취급 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_04.pdf", "type": "PDF"},
+{"title": "특별교육 5. 가스발생장치 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_05.pdf", "type": "PDF"},
+{"title": "특별교육 6. 반응기교반기 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_06.pdf", "type": "PDF"},
+{"title": "특별교육 7. 화학설비탱크내작업 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_07.pdf", "type": "PDF"},
+{"title": "특별교육 8. 호퍼저장탱크 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_08.pdf", "type": "PDF"},
+{"title": "특별교육 9. 건조설비 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_09.pdf", "type": "PDF"},
+{"title": "특별교육 12. 목재가공기계 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_12.pdf", "type": "PDF"},
+{"title": "특별교육 15. 건설용리프트곤돌라 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_15.pdf", "type": "PDF"},
+{"title": "특별교육 16. 주물단조 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_16.pdf", "type": "PDF"},
+{"title": "특별교육 18. 콘크리트파쇄기 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_18.pdf", "type": "PDF"},
+{"title": "특별교육 19. 지반굴착 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_19.pdf", "type": "PDF"},
+{"title": "특별교육 20. 흙막이지보공 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_20.pdf", "type": "PDF"},
+{"title": "특별교육 21. 터널굴착 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_21.pdf", "type": "PDF"},
+{"title": "특별교육 22. 암석굴착 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_22.pdf", "type": "PDF"},
+{"title": "특별교육 23. 2m 이상 적재해체 교안", "category": "특별교육", "industry": "공통", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_23.pdf", "type": "PDF"},
+{"title": "특별교육 24. 선박하역 교안", "category": "특별교육", "industry": "공통", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_24.pdf", "type": "PDF"},
+{"title": "특별교육 25. 거푸집동바리 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_25.pdf", "type": "PDF"},
+{"title": "특별교육 26. 비계조립해체 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_26.pdf", "type": "PDF"},
+{"title": "특별교육 27. 철골조립해체 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_27.pdf", "type": "PDF"},
+{"title": "특별교육 28. 목조건축물 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_28.pdf", "type": "PDF"},
+{"title": "특별교육 29. 콘크리트구조물해체 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_29.pdf", "type": "PDF"},
+{"title": "특별교육 30. 타워크레인설치해체 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_30.pdf", "type": "PDF"},
+{"title": "특별교육 31. 보일러 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_31.pdf", "type": "PDF"},
+{"title": "특별교육 32. 압력용기 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_32.pdf", "type": "PDF"},
+{"title": "특별교육 35. 관리대상유해물질 교안", "category": "특별교육", "industry": "공통", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_35.pdf", "type": "PDF"},
+{"title": "특별교육 36. 로봇작업 교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_36.pdf", "type": "PDF"},
+{"title": "특별교육 37. 석면해체제거 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_37.pdf", "type": "PDF"},
+{"title": "특별교육 39. 타워크레인신호 교안", "category": "특별교육", "industry": "건설", "date": "2026-10-17", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_39.pdf", "type": "PDF"},
+{"title": "특별교육 밀폐공간 통합교안", "category": "특별교육", "industry": "공통", "date": "2026-10-17", "desc": "특별안전보건교육 통합 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_confined.pdf", "type": "PDF"},
+{"title": "특별교육 크레인 통합교안", "category": "특별교육", "industry": "공통", "date": "2026-10-17", "desc": "특별안전보건교육 통합 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_crane.pdf", "type": "PDF"},
+{"title": "특별교육 프레스 통합교안", "category": "특별교육", "industry": "제조", "date": "2026-10-17", "desc": "특별안전보건교육 통합 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_press.pdf", "type": "PDF"},
+{"title": "특별교육 하역운반기계 통합교안", "category": "특별교육", "industry": "공통", "date": "2026-10-17", "desc": "특별안전보건교육 통합 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_handling.pdf", "type": "PDF"},
+{"title": "특별교육 공통내용 교안", "category": "특별교육", "industry": "공통", "date": "2026-10-18", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_00.pdf", "type": "PDF"},
+{"title": "특별교육 10. 집재장치 교안", "category": "특별교육", "industry": "공통", "date": "2026-10-18", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_10.pdf", "type": "PDF"},
+{"title": "특별교육 17. 정전활선작업 교안", "category": "특별교육", "industry": "공통", "date": "2026-10-18", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_17.pdf", "type": "PDF"},
+{"title": "특별교육 33. 방사선업무 교안", "category": "특별교육", "industry": "공통", "date": "2026-10-18", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_33.pdf", "type": "PDF"},
+{"title": "특별교육 38. 화재위험작업 교안", "category": "특별교육", "industry": "공통", "date": "2026-10-18", "desc": "특별안전보건교육 대상 작업 근로자 교육 교안 (PPT를 PDF로 변환)", "file": "files/2610_special_38.pdf", "type": "PDF"},
+{"title": "특별교육 대상 작업순서 · 위험성평가 (39종)", "category": "특별교육", "industry": "공통", "date": "2026-10-19", "desc": "39개 대상 작업별 작업순서·유해위험요인·안전점검·위험성평가 요약 (PPT를 PDF로 변환)", "file": "files/2610_special_39_risk.pdf", "type": "PDF"},
+{"title": "1인 안전관리자 법정 주기 업무 캘린더 (2026 개정 반영)", "category": "점검표 · 서식", "industry": "공통", "date": "2026-10-25", "desc": "일·월·분기·반기·연 주기별 법정 업무와 증빙 정리 (공통·제조·건설) (PPT를 PDF로 변환)", "file": "files/2610_solo_manager_calendar.pdf", "type": "PDF"},
+{"title": "유해위험기계 안전인증·자율안전확인 (제조업 50장)", "category": "교육자료", "industry": "제조", "date": "2026-11-22", "desc": "안전인증·자율안전확인신고·안전검사 비교, 프레스·크레인·연삭기·로봇 등 기계별 위험성 예방대책 (PPT를 PDF로 변환)", "file": "files/261122_manufacturing_certification_50.pdf", "type": "PDF"},
+{"title": "건설장비·가설기자재 안전인증·자율안전확인 (건설업 50장)", "category": "교육자료", "industry": "건설", "date": "2026-11-22", "desc": "장비 반입 관리, 타워크레인·리프트·고소작업대·비계·안전대 등 위험성 예방대책 (PPT를 PDF로 변환)", "file": "files/261122_construction_certification_50.pdf", "type": "PDF"},
+{"title": "안전 기본수칙과 보건관리 (공통 50장)", "category": "교육자료", "industry": "공통", "date": "2026-11-22", "desc": "기계·기구 기본수칙 + 유해물질·소음·폭염·밀폐공간·근골격계·건강진단 (PPT를 PDF로 변환)", "file": "files/261122_common_health_basics_50.pdf", "type": "PDF"}
 ]
