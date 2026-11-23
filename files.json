@@ -1,6 +1,9 @@
 [
-{"title": "1인 안전관리자 법정 실무 서식집", "category": "점검표 · 서식", "industry": "공통", "date": "2026-10-04", "desc": "1인 안전관리자가 쓰는 법정 실무 서식 모음 (98쪽)", "file": "files/261004_1인안전관리자_법정실무서식집.pdf", "type": "PDF"},
-{"title": "관리자 최소시간 체크리스트", "category": "점검표 · 서식", "industry": "공통", "date": "2026-10-04", "desc": "관리자가 최소 시간으로 확인할 핵심 점검 항목 (5쪽)", "file": "files/261004_관리자_최소시간_체크리스트.pdf", "type": "PDF"},
+{"title": "산업현장 대형재해 안전보건법규 요약보고 (2026.11 개정판)", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-03", "desc": "최근 대형재해 사례와 관련 안전보건법규 요약 (58쪽, 보도된 사고 사례 포함)", "file": "files/2611_major_disaster_law_summary.pdf", "type": "PDF"},
+{"title": "협력업체 사망사고 – 원청 책임 사례분석 (업데이트판)", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-17", "desc": "협력업체 사망사고가 원청에 미치는 영향과 사례 업데이트 (57쪽)", "file": "files/2611_contractor_fatality_cases_update.pdf", "type": "PDF"},
+{"title": "고용노동부 보도자료 – 2026년 3분기 재해조사대상 사망사고 현황", "category": "사고사례", "industry": "공통", "date": "2026-10-20", "desc": "3분기 재해조사대상 사망사고 발생 현황 통계 (고용노동부 보도자료 원문)", "file": "files/2610_moel_press_q3_fatality_stats.pdf", "type": "PDF"},
+{"title": "1인 안전관리자 법정 실무 서식집", "category": "점검표 · 서식", "industry": "공통", "date": "2026-10-04", "desc": "1인 안전관리자가 쓰는 법정 실무 서식 모음 (98쪽)", "file": "files/2610_solo_manager_forms.pdf", "type": "PDF"},
+{"title": "관리자 최소시간 체크리스트", "category": "점검표 · 서식", "industry": "공통", "date": "2026-10-04", "desc": "관리자가 최소 시간으로 확인할 핵심 점검 항목 (5쪽)", "file": "files/2610_manager_min_time_checklist.pdf", "type": "PDF"},
 {"title": "산업안전보건법 · 중대재해처벌법 핵심정리 (교육용 PPT)", "category": "교육자료", "industry": "공통", "date": "2026-11-21", "desc": "두 법 비교, 역할 체계, 산안법 공통 의무, 중처법 9개 항목, 2026년 변동사항 12장. 2026.11 기준, 현행 조문 대조 필요.", "file": "files/261121_common_sanan_jungcheo_summary.pdf", "type": "PDF"},
 {"title": "안전경영책임계획 – 산안법 · 중처법 연계안", "category": "법령 · 중처법", "industry": "공통", "date": "2026-11-21", "desc": "공공기관 안전경영책임계획 목차 9개 항목별 연계 조문 · 작성 내용 · 증빙, 연간 일정.", "file": "files/261121_common_safety_plan_link.pdf", "type": "PDF"},
 {"title": "비상대응 시나리오 ① 안전사고", "category": "사고사례", "industry": "공통", "date": "2026-11-12", "desc": "안전사고 발생 시 신고·구호·보고 단계별 비상대응 시나리오 (PPT를 PDF로 변환)", "file": "files/2611_emergency_01_accident.pdf", "type": "PDF"},
