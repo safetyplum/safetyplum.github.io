@@ -78,8 +78,8 @@ const CATS=["법령 · 중처법","위험성평가 · JSA","유해위험방지�
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let rows=[],cat="전체";
-const mq=window.matchMedia("(max-width:600px)");let PER=mq.matches?10:30,page=1;
-mq.addEventListener("change",()=>{PER=mq.matches?10:30;page=1;render()});
+const mq=window.matchMedia("(max-width:600px)");let PER=mq.matches?10:20,page=1;
+mq.addEventListener("change",()=>{PER=mq.matches?10:20;page=1;render()});
 function render(){
   const n=c=>c==="전체"?rows.length:rows.filter(r=>r.category===c).length;
   $("#tabs").innerHTML=["전체",...CATS].filter(c=>c==="전체"||c===cat||n(c)>0).map(c=>`<button class="tab" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(c)}<small>${n(c)}</small></button>`).join("");
