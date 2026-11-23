@@ -42,6 +42,11 @@ input[type=search]{flex:1 1 260px}
 .notice{border:1px solid var(--org);color:var(--org);border-radius:10px;padding:12px 16px;font-size:14px;margin-top:22px;background:var(--panel)}
 footer{font-size:13px;color:var(--sub);line-height:1.7}
 @media(max-width:600px){.row{grid-template-columns:52px minmax(0,1fr)}.row .btn{grid-column:1/-1}}
+.pager{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin-top:16px}
+.pg{min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:var(--panel);border-radius:8px;cursor:pointer;font-weight:500}
+.pg[aria-current=page]{background:var(--yel);border-color:var(--yel);color:#111;font-weight:700}
+.pg:disabled{opacity:.4;cursor:default}
+.pginfo{width:100%;text-align:center;font-size:13px;color:var(--sub);margin-top:4px}
 </style>
 </head>
 <body>
@@ -60,6 +65,7 @@ footer{font-size:13px;color:var(--sub);line-height:1.7}
   </div>
   <div class="tabs" id="tabs" role="toolbar" aria-label="분류"></div>
   <div class="list" id="list"><div class="empty">자료 목록을 불러오는 중입니다…</div></div>
+  <nav class="pager" id="pager" aria-label="쪽 이동"></nav>
   <p class="notice">법령 관련 자료는 작성일 기준입니다. 사용 전 국가법령정보센터 현행 조문과 안전보건공단 안전보건법령 스마트검색으로 대조하시기 바랍니다.</p>
   <footer class="band" style="padding-inline:0">
     한국재해예방관리원(주) · 노동부지정 재해예방전문기관 · 안전관리전문기관<br>
@@ -72,21 +78,33 @@ const CATS=["법령 · 중처법","위험성평가 · JSA","유해위험방지�
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let rows=[],cat="전체";
+const PER=30;let page=1;
 function render(){
   const n=c=>c==="전체"?rows.length:rows.filter(r=>r.category===c).length;
-  $("#tabs").innerHTML=["전체",...CATS].map(c=>`<button class="tab" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(c)}<small>${n(c)}</small></button>`).join("");
+  $("#tabs").innerHTML=["전체",...CATS].filter(c=>c==="전체"||c===cat||n(c)>0).map(c=>`<button class="tab" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(c)}<small>${n(c)}</small></button>`).join("");
   const q=$("#q").value.trim().toLowerCase(),ind=$("#ind").value;
   let v=rows.filter(r=>(cat==="전체"||r.category===cat)&&(!ind||r.industry===ind)&&(!q||(r.title+" "+(r.desc||"")).toLowerCase().includes(q)));
   v.sort($("#sort").value==="name"?(a,b)=>a.title.localeCompare(b.title,"ko"):(a,b)=>(b.date||"").localeCompare(a.date||""));
   $("#cnt").textContent=rows.length+"건";
-  $("#list").innerHTML=v.length?v.map(r=>`<div class="row"><div class="kind">${esc(r.type||"파일")}</div><div>
+  const pages=Math.max(1,Math.ceil(v.length/PER));if(page>pages)page=pages;
+  const show=v.slice((page-1)*PER,page*PER);
+  $("#list").innerHTML=show.length?show.map(r=>`<div class="row"><div class="kind">${esc(r.type||"파일")}</div><div>
     <p class="t">${esc(r.title)}</p><p class="m"><span>${esc(r.category)}</span><span>${esc(r.industry)}</span><span>${esc(r.date)}</span></p>
     ${r.desc?`<p class="d">${esc(r.desc)}</p>`:""}</div>
     <a class="btn" href="${esc(r.file||r.link)}" target="_blank" rel="noopener">열기</a></div>`).join("")
     :`<div class="empty">${rows.length?"조건에 맞는 자료가 없습니다.":"아직 등록된 자료가 없습니다."}</div>`;
+  let pg="";
+  if(pages>1){
+    pg+=`<button class="pg" data-p="${page-1}" ${page===1?"disabled":""}>이전</button>`;
+    for(let i=1;i<=pages;i++)pg+=`<button class="pg" data-p="${i}" aria-current="${i===page?"page":"false"}">${i}</button>`;
+    pg+=`<button class="pg" data-p="${page+1}" ${page===pages?"disabled":""}>다음</button>`;
+    pg+=`<span class="pginfo">${v.length}건 중 ${(page-1)*PER+1}–${Math.min(page*PER,v.length)}</span>`;
+  }
+  $("#pager").innerHTML=pg;
 }
-$("#tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(b){cat=b.dataset.c;render()}});
-["#q","#ind","#sort"].forEach(s=>$(s).addEventListener("input",render));
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(b){cat=b.dataset.c;page=1;render()}});
+["#q","#ind","#sort"].forEach(s=>$(s).addEventListener("input",()=>{page=1;render()}));
+$("#pager").addEventListener("click",e=>{const b=e.target.closest(".pg");if(!b||b.disabled)return;page=+b.dataset.p;render();$("#tabs").scrollIntoView({behavior:"smooth",block:"start"})});
 fetch("files.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{rows=d;render()})
   .catch(()=>{$("#list").innerHTML='<div class="empty">목록을 불러오지 못했습니다. 잠시 후 다시 열어 주세요.</div>'});
 }
