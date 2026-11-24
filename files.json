@@ -763,5 +763,41 @@
     "desc": "산안법 서류 항목별 중점 CHECK-POINT·법적근거 목록과 '당 현장 적용' 시트(착공 전 안전관리계획서·유해위험방지계획서 등). 엑셀 원본. 조문은 현행 법령과 대조 필요.",
     "file": "files/261124_construction_safety_manager_document_list.xlsx",
     "type": "XLSX"
+  },
+  {
+    "title": "건설업 관리자 법규 준수프로그램 (2026 안전보건 교육 기본서 핵심정리)",
+    "category": "교육자료",
+    "industry": "건설",
+    "date": "2026-11-24",
+    "desc": "공단 2026 안전보건 교육 기본서(건설업) 요약 + 관리자 교육용 법규 준수프로그램: 직책별 역할, 연간 일정표, 반기 자체점검표, 서류 보존기간, 운영 절차 (28장). 과태료·요율은 현행 법령과 대조 필요.",
+    "file": "files/261124_construction_manager_compliance_program.pdf",
+    "type": "PDF"
+  },
+  {
+    "title": "제조업 관리자 법규 준수프로그램 (2026 안전보건 교육 기본서 핵심정리)",
+    "category": "교육자료",
+    "industry": "제조",
+    "date": "2026-11-24",
+    "desc": "공단 2026 안전보건 교육 기본서(제조업) 요약 + 관리자 교육용 법규 준수프로그램: 담당자 선임, 방호조치·안전검사, 작업환경측정, 유해위험방지계획서·PSM, 연간 일정표, 반기 자체점검표 (28장). 과태료는 현행 법령과 대조 필요.",
+    "file": "files/261124_manufacturing_manager_compliance_program.pdf",
+    "type": "PDF"
+  },
+  {
+    "title": "안전보건 교육 기본서 2026 개정판 - 건설업 (안전보건공단 원본)",
+    "category": "교육자료",
+    "industry": "건설",
+    "date": "2026-11-24",
+    "desc": "안전보건공단 발행 원본(건설업편, 36쪽). 산안법 주요 내용 16개 항목과 중대재해처벌법 주요 내용. 내용 수정 없이 업종별로 분리.",
+    "file": "files/261124_kosha_basic_safety_edu_construction_2026.pdf",
+    "type": "PDF"
+  },
+  {
+    "title": "안전보건 교육 기본서 2026 개정판 - 제조업 (안전보건공단 원본)",
+    "category": "교육자료",
+    "industry": "제조",
+    "date": "2026-11-24",
+    "desc": "안전보건공단 발행 원본(제조업편, 48쪽). 산안법 주요 내용 21개 항목과 중대재해처벌법 주요 내용. 내용 수정 없이 업종별로 분리.",
+    "file": "files/261124_kosha_basic_safety_edu_manufacturing_2026.pdf",
+    "type": "PDF"
   }
 ]
