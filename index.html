@@ -3,112 +3,219 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>안전자료 공유실</title>
-<meta name="description" content="산업안전보건법 · 중대재해처벌법 실무 양식, 점검표, 교육자료 공유실">
+<title>산업안전 AI 안전자료실</title>
+<meta name="description" content="산업안전보건법 · 중대재해처벌법 실무 양식, 점검표, 교육자료, 웹도구를 무료로 공유하는 안전자료실">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light dark;
---bg:light-dark(#eaf4fb,#0f1a22);--panel:light-dark(#ffffff,#16242e);--ink:light-dark(#111111,#eef3f6);
---sub:light-dark(#4a5560,#a9b6bf);--line:light-dark(#c9dcea,#2a3d4a);--sky:light-dark(#cfe6f6,#1f3a4d);
---yel:#ffd400;--org:light-dark(#c45a00,#ffa04d);--focus:light-dark(#0b5cad,#7cc0ff)}
+:root{--bg:#eaf4fb;--panel:#ffffff;--ink:#111111;--sub:#4a5560;--line:#c9dcea;--sky:#cfe6f6;--sky2:#dcefff;
+--yel:#ffd400;--org:#c45a00;--grn:#1f8a4c;--focus:#0b5cad}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Noto Sans KR",system-ui,sans-serif;overflow-x:clip}
-.band{padding:clamp(20px,3vw,40px) max(5vw,16px);max-width:1240px;margin:0 auto}
-h1{font-size:clamp(28px,4vw,40px);line-height:1.1;margin:0 0 6px}
-.lead{color:var(--sub);margin:0;max-width:62ch}
-.top{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between}
-.meter{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;min-width:200px}
-.meter b{font-size:22px}
-.tools{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 12px}
-input,select,button{font:inherit;font-size:16px;color:var(--ink)}
-input[type=search],select{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:44px}
-input[type=search]{flex:1 1 260px}
+a{color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
-.tab{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 14px;min-height:44px;cursor:pointer}
-.tab[aria-pressed=true]{background:var(--yel);border-color:var(--yel);color:#111;font-weight:700}
-.tab small{opacity:.7;margin-left:4px}
-.list{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-top:14px}
-.row{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid var(--line)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(4vw,14px)}
+/* 상단 줄 */
+.topbar{background:var(--panel);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:14px;min-height:60px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:900;font-size:20px;text-decoration:none;white-space:nowrap}
+.logo i{display:grid;place-items:center;width:34px;height:34px;border-radius:8px;background:var(--yel);font-style:normal;font-size:18px}
+.topbar input{flex:1;max-width:460px;margin-left:auto;font:inherit;border:1px solid var(--line);border-radius:999px;padding:9px 16px;min-height:44px;background:var(--bg)}
+.toplink{font-size:14px;white-space:nowrap;text-decoration:none;font-weight:500}
+@media(max-width:640px){.toplink{display:none}.logo span{font-size:17px}}
+/* 배너 */
+.hero{background:linear-gradient(100deg,#d6ecfb 0%,#eaf6ff 55%,#fff6c7 100%);border-bottom:4px solid var(--yel)}
+.hero .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:20px 40px;padding-block:clamp(22px,4vw,44px)}
+.hero svg{width:clamp(72px,10vw,120px);height:auto;flex:none}
+.hero h1{margin:0;font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.1;letter-spacing:-.5px}
+.hero h1 em{font-style:normal;color:var(--grn)}
+.hero p{margin:8px 0 0;font-size:clamp(15px,1.8vw,19px);font-weight:500}
+.slogan{margin-left:auto;font-weight:900;font-size:clamp(18px,2.4vw,28px);line-height:1.35;color:#0b3d6b;border-left:5px solid var(--org);padding-left:16px}
+.slogan small{display:block;font-size:.62em;font-weight:700;color:var(--sub)}
+/* 메뉴 */
+.menu{background:var(--sky);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.menu .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.menu button{flex:none;font:inherit;font-weight:700;background:none;border:0;border-bottom:4px solid transparent;padding:14px 14px 10px;min-height:48px;cursor:pointer;color:var(--ink)}
+.menu button[aria-pressed=true]{border-bottom-color:var(--org)}
+/* 분류 카드 */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:22px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;font:inherit;color:var(--ink);transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(11,61,107,.12)}
+.card svg{width:40px;height:40px;stroke:#0b3d6b;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card b{display:block;font-size:17px;margin-top:6px}
+.card small{display:block;font-size:13px;color:var(--sub)}
+.card .n{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;background:var(--sky2);border-radius:999px;padding:1px 10px}
+.card.hot{background:#fff1e6;border-color:#f3c39b}.card.hot svg{stroke:var(--org)}
+.card.tool{background:#fff9d6;border-color:#ecd66b}
+/* 본문 2단 */
+.main{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:22px;align-items:start;margin-bottom:30px}
+@media(max-width:900px){.main{grid-template-columns:1fr}}
+.h2{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}
+.h2 h2{margin:0;font-size:22px;border-left:5px solid var(--grn);padding-left:10px}
+.h2 a{font-size:14px;color:var(--sub);text-decoration:none}
+.news{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.post{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none}
+.post .thumb{position:relative;height:92px;background:var(--sky);display:grid;place-items:center}
+.post .thumb span{font-size:30px;font-weight:900;color:#0b3d6b;opacity:.22;letter-spacing:2px}
+.badge{position:absolute;left:10px;bottom:10px;font-size:13px;font-weight:700;background:var(--yel);border-radius:6px;padding:2px 8px}
+.badge.r{background:#ffd9bf}
+.post .tx{padding:12px 14px;flex:1;display:flex;flex-direction:column}
+.post b{font-size:16px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post small{margin-top:auto;padding-top:8px;font-size:13px;color:var(--sub)}
+/* 오른쪽 */
+.side{display:grid;gap:14px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.box h3{margin:0 0 8px;font-size:18px}
+.box p{margin:0;font-size:15px}
+.promise{margin-top:10px!important;font-weight:900;font-size:18px!important;color:var(--grn)}
+.stat{display:flex;gap:10px;margin-top:12px}
+.stat div{flex:1;background:var(--bg);border-radius:8px;padding:8px;text-align:center;font-size:13px}
+.stat b{display:block;font-size:20px}
+.rank{list-style:none;margin:0;padding:0}
+.rank li{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.rank li:first-child{border-top:0}
+.rank i{font-style:normal;font-weight:900;width:22px;text-align:center}
+.rank span{flex:1}.rank em{font-style:normal;font-weight:700;font-size:13px;background:var(--sky2);border-radius:999px;padding:1px 9px}
+.btnY{display:flex;align-items:center;justify-content:center;min-height:44px;margin-top:12px;border-radius:8px;background:var(--yel);color:#111;text-decoration:none;font-weight:700}
+/* 전체 목록 */
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}
+select,.tools input{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:44px}
+.tools input{flex:1 1 240px}
+.list{background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.row{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid var(--line)}
 .row:first-child{border-top:0}
 .kind{font-size:13px;font-weight:700;text-align:center;border:1px solid var(--line);border-radius:6px;padding:6px 0;background:var(--sky)}
 .t{font-weight:700;margin:0;overflow-wrap:anywhere}
 .m{font-size:13px;color:var(--sub);margin:2px 0 0}
 .m span+span::before{content:" · "}
 .d{font-size:14px;margin:4px 0 0;color:var(--sub)}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:8px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:8px;background:var(--yel);color:#111;text-decoration:none;font-weight:700;white-space:nowrap}
 .empty{padding:36px 16px;text-align:center;color:var(--sub)}
-.notice{border:1px solid var(--org);color:var(--org);border-radius:10px;padding:12px 16px;font-size:14px;margin-top:22px;background:var(--panel)}
-footer{font-size:13px;color:var(--sub);line-height:1.7}
 @media(max-width:600px){.row{grid-template-columns:52px minmax(0,1fr)}.row .btn{grid-column:1/-1}}
-.pager{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin-top:16px}
-.pg{min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:var(--panel);border-radius:8px;cursor:pointer;font-weight:500}
-.pg[aria-current=page]{background:var(--yel);border-color:var(--yel);color:#111;font-weight:700}
+.pager{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:16px}
+.pg{min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:var(--panel);border-radius:8px;cursor:pointer;font:inherit}
+.pg[aria-current=page]{background:var(--yel);border-color:var(--yel);font-weight:700}
 .pg:disabled{opacity:.4;cursor:default}
-.pginfo{width:100%;text-align:center;font-size:13px;color:var(--sub);margin-top:4px}
+.pginfo{width:100%;text-align:center;font-size:13px;color:var(--sub)}
+.notice{border:1px solid var(--org);color:var(--org);border-radius:10px;padding:12px 16px;font-size:14px;margin:22px 0;background:var(--panel)}
+footer{background:var(--sky);border-top:1px solid var(--line);font-size:14px;line-height:1.8;padding:20px 0}
 </style>
 </head>
 <body>
-<main class="band">
-  <div class="top">
-    <div>
-      <h1>안전자료 공유실</h1>
-      <p class="lead">산업안전보건법 · 중대재해처벌법 실무에 쓰는 양식, 점검표, 교육자료를 분류별로 모았습니다. 누구나 무료로 열람 · 다운로드할 수 있습니다.</p>
+<header class="topbar"><div class="wrap">
+  <a class="logo" href="./"><i>⛑</i><span>안전자료실</span></a>
+  <input type="search" id="q" placeholder="자료 검색 (예: 위험성평가, 지게차)" aria-label="자료 검색">
+  <a class="toplink" href="https://blog.naver.com/safeplum" target="_blank" rel="noopener">블로그</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <svg viewBox="0 0 120 100" aria-hidden="true"><path d="M14 70a46 46 0 0 1 92 0" fill="#ffd400" stroke="#111" stroke-width="4"/><path d="M50 26h20v44H50z" fill="#ffe766" stroke="#111" stroke-width="4"/><rect x="6" y="68" width="108" height="12" rx="6" fill="#ffd400" stroke="#111" stroke-width="4"/><path d="M60 40v18M51 49h18" stroke="#1f8a4c" stroke-width="6" stroke-linecap="round"/></svg>
+  <div>
+    <h1>산업안전 <em>AI</em> 안전자료실</h1>
+    <p>안전한 오늘, 행복한 내일을 만드는 산업안전 실무 자료</p>
+  </div>
+  <div class="slogan">안전이 최우선입니다!<small>함께 만드는 안전한 일터</small></div>
+</div></section>
+
+<nav class="menu" aria-label="분류 메뉴"><div class="wrap" id="menu"></div></nav>
+
+<main class="wrap">
+  <div class="cards" id="cards"></div>
+
+  <div class="main">
+    <section>
+      <div class="h2"><h2>최신 자료</h2><a href="#all">전체보기 ›</a></div>
+      <div class="news" id="news"></div>
+    </section>
+    <aside class="side">
+      <div class="box">
+        <h3>🌱 자료실 소개</h3>
+        <p>산업현장의 안전을 위한 법령 요약, 교육자료, 점검표, 웹도구를 쉽고 정확하게 공유합니다. 회사명 없는 일반 자료만 올립니다.</p>
+        <p class="promise">안전한 일터, 우리의 약속입니다!</p>
+        <div class="stat"><div>등록 자료<b id="cnt">–</b></div><div>웹도구<b id="tcnt">–</b></div><div id="visits" hidden>누적 방문<b id="vcnt"></b></div></div>
+        <a class="btnY" href="https://blog.naver.com/safeplum" target="_blank" rel="noopener">블로그 이웃추가 +</a>
+      </div>
+      <div class="box">
+        <h3>📂 분류별 자료 수</h3>
+        <ul class="rank" id="rank"></ul>
+      </div>
+    </aside>
+  </div>
+
+  <section id="all">
+    <div class="h2"><h2 id="alltitle">전체 자료</h2></div>
+    <div class="tools">
+      <input type="search" id="q2" placeholder="자료명 · 설명 검색" aria-label="목록 검색">
+      <select id="ind" aria-label="업종"><option value="">전체 업종</option><option>공통</option><option>제조</option><option>건설</option></select>
+      <select id="sort" aria-label="정렬"><option value="new">최신순</option><option value="name">이름순</option></select>
     </div>
-    <div class="meter"><span class="m">등록 자료</span><br><b id="cnt">–</b><p class="m" id="visits" hidden>누적 방문 <b id="vcnt"></b>회</p></div>
-  </div>
-  <div class="tools">
-    <input type="search" id="q" placeholder="자료명 · 설명 검색 (예: 위험성평가)" aria-label="검색">
-    <select id="ind" aria-label="업종"><option value="">전체 업종</option><option>공통</option><option>제조</option><option>건설</option></select>
-    <select id="sort" aria-label="정렬"><option value="new">최신순</option><option value="name">이름순</option></select>
-  </div>
-  <div class="tabs" id="tabs" role="toolbar" aria-label="분류"></div>
-  <div class="list" id="list"><div class="empty">자료 목록을 불러오는 중입니다…</div></div>
-  <nav class="pager" id="pager" aria-label="쪽 이동"></nav>
+    <div class="list" id="list"><div class="empty">자료 목록을 불러오는 중입니다…</div></div>
+    <nav class="pager" id="pager" aria-label="쪽 이동"></nav>
+  </section>
   <p class="notice">법령 관련 자료는 작성일 기준입니다. 사용 전 국가법령정보센터 현행 조문과 안전보건공단 안전보건법령 스마트검색으로 대조하시기 바랍니다.</p>
-  <footer class="band" style="padding-inline:0">
-    한국재해예방관리원(주) · 노동부지정 재해예방전문기관 · 안전관리전문기관<br>
-    블로그: <a href="https://blog.naver.com/safeplum" target="_blank" rel="noopener">blog.naver.com/safeplum</a>
-  </footer>
 </main>
+<footer><div class="wrap">
+  한국재해예방관리원(주) · 노동부지정 재해예방전문기관 · 안전관리전문기관<br>
+  블로그: <a href="https://blog.naver.com/safeplum" target="_blank" rel="noopener">blog.naver.com/safeplum</a> · 자료실: safetyplum.github.io
+</div></footer>
 <script>
 {
-const CATS=["법령 · 중처법","화학물질 위험성평가","위험성평가 · JSA","유해위험방지계획서","교육자료","특별교육","점검표 · 서식","사고사례","기타"];
-const KEEP=["화학물질 위험성평가","위험성평가 · JSA"]; // 자료가 0건이어도 항상 보이는 탭
+const ICON={
+ law:'<path d="M12 4v16M6 20h12M4 8h16M7 8l-3 6a3 3 0 0 0 6 0zM17 8l-3 6a3 3 0 0 0 6 0z"/>',
+ chem:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M7 15h10"/>',
+ risk:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M9 13l2 2 4-4"/>',
+ plan:'<path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/>',
+ edu:'<path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5"/>',
+ spec:'<path d="M12 2l3 6 6 1-4 4 1 6-6-3-6 3 1-6-4-4 6-1z"/>',
+ form:'<path d="M3 7h7l2 2h9v11H3z"/>',
+ acc:'<path d="M12 3a6 6 0 0 0-6 6v6h12V9a6 6 0 0 0-6-6zM4 19h16M12 1v1M4 6l1 1M20 6l-1 1"/>'
+};
+const CATS=[
+ {c:"법령 · 중처법",s:"법령·질의회시",i:"law"},
+ {c:"화학물질 위험성평가",s:"CHARM·웹도구",i:"chem",cls:"tool"},
+ {c:"위험성평가 · JSA",s:"JSA·TBM",i:"risk"},
+ {c:"유해위험방지계획서",s:"제조·건설",i:"plan"},
+ {c:"교육자료",s:"교안·동영상",i:"edu"},
+ {c:"특별교육",s:"39개 작업",i:"spec"},
+ {c:"점검표 · 서식",s:"점검표·계획서",i:"form"},
+ {c:"사고사례",s:"사고원인·재발방지",i:"acc",cls:"hot"}
+];
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let rows=[],cat="전체";
-const mq=window.matchMedia("(max-width:600px)");let PER=mq.matches?10:20,page=1;
+let rows=[],cat="전체",page=1;
+const mq=matchMedia("(max-width:600px)");let PER=mq.matches?10:20;
 mq.addEventListener("change",()=>{PER=mq.matches?10:20;page=1;render()});
+const n=c=>c==="전체"?rows.length:rows.filter(r=>r.category===c).length;
+const href=r=>esc(r.file||r.link);
+function setCat(c,scroll){cat=c;page=1;render();if(scroll)$("#all").scrollIntoView({behavior:"smooth"})}
 function render(){
-  const n=c=>c==="전체"?rows.length:rows.filter(r=>r.category===c).length;
-  $("#tabs").innerHTML=["전체",...CATS].filter(c=>c==="전체"||c===cat||KEEP.includes(c)||n(c)>0).map(c=>`<button class="tab" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(c)}<small>${n(c)}</small></button>`).join("");
-  const q=$("#q").value.trim().toLowerCase(),ind=$("#ind").value;
+  $("#menu").innerHTML=["전체",...CATS.map(x=>x.c)].map(c=>`<button aria-pressed="${c===cat}" data-c="${esc(c)}">${c==="전체"?"홈":esc(c)}</button>`).join("");
+  $("#cards").innerHTML=CATS.map(x=>`<button class="card ${x.cls||""}" data-c="${esc(x.c)}"><svg viewBox="0 0 24 24">${ICON[x.i]}</svg><b>${esc(x.c.replace(" · ","·"))}</b><small>${esc(x.s)}</small><span class="n">${n(x.c)}건</span></button>`).join("");
+  const latest=[...rows].sort((a,b)=>(b.date||"").localeCompare(a.date||"")).slice(0,6);
+  $("#news").innerHTML=latest.map(r=>`<a class="post" href="${href(r)}" target="_blank" rel="noopener"><div class="thumb"><span>${esc(r.type||"PDF")}</span><em class="badge ${r.category==="사고사례"?"r":""}">${esc(r.category.replace(" · ","·"))}</em></div><div class="tx"><b>${esc(r.title)}</b><small>${esc(r.date)} · ${esc(r.industry)}</small></div></a>`).join("");
+  $("#rank").innerHTML=CATS.map(x=>({...x,k:n(x.c)})).filter(x=>x.k).sort((a,b)=>b.k-a.k).slice(0,5).map((x,i)=>`<li><i>${i+1}</i><span>${esc(x.c)}</span><em>${x.k}건</em></li>`).join("");
+  const tools=rows.filter(r=>r.type==="웹도구").length;$("#cnt").textContent=rows.length-tools;$("#tcnt").textContent=tools;
+  $("#alltitle").textContent=cat==="전체"?"전체 자료":cat;
+  const q=($("#q2").value||$("#q").value).trim().toLowerCase(),ind=$("#ind").value;
   let v=rows.filter(r=>(cat==="전체"||r.category===cat)&&(!ind||r.industry===ind)&&(!q||(r.title+" "+(r.desc||"")).toLowerCase().includes(q)));
   v.sort($("#sort").value==="name"?(a,b)=>a.title.localeCompare(b.title,"ko"):(a,b)=>(b.date||"").localeCompare(a.date||""));
-  {const tools=rows.filter(r=>r.type==="웹도구").length;$("#cnt").textContent=(rows.length-tools)+"건"+(tools?" · 웹도구 "+tools+"개":"")}
   const pages=Math.max(1,Math.ceil(v.length/PER));if(page>pages)page=pages;
-  const show=v.slice((page-1)*PER,page*PER);
-  $("#list").innerHTML=show.length?show.map(r=>`<div class="row"><div class="kind">${esc(r.type||"파일")}</div><div>
-    <p class="t">${esc(r.title)}</p><p class="m"><span>${esc(r.category)}</span><span>${esc(r.industry)}</span><span>${esc(r.date)}</span></p>
-    ${r.desc?`<p class="d">${esc(r.desc)}</p>`:""}</div>
-    <a class="btn" href="${esc(r.file||r.link)}" target="_blank" rel="noopener">열기</a></div>`).join("")
+  $("#list").innerHTML=v.length?v.slice((page-1)*PER,page*PER).map(r=>`<div class="row"><div class="kind">${esc(r.type||"파일")}</div><div><p class="t">${esc(r.title)}</p><p class="m"><span>${esc(r.category)}</span><span>${esc(r.industry)}</span><span>${esc(r.date)}</span></p>${r.desc?`<p class="d">${esc(r.desc)}</p>`:""}</div><a class="btn" href="${href(r)}" target="_blank" rel="noopener">열기</a></div>`).join("")
     :`<div class="empty">${rows.length?"조건에 맞는 자료가 없습니다.":"아직 등록된 자료가 없습니다."}</div>`;
   let pg="";
-  if(pages>1){
-    pg+=`<button class="pg" data-p="${page-1}" ${page===1?"disabled":""}>이전</button>`;
+  if(pages>1){pg+=`<button class="pg" data-p="${page-1}" ${page===1?"disabled":""}>이전</button>`;
     for(let i=1;i<=pages;i++)pg+=`<button class="pg" data-p="${i}" aria-current="${i===page?"page":"false"}">${i}</button>`;
-    pg+=`<button class="pg" data-p="${page+1}" ${page===pages?"disabled":""}>다음</button>`;
-    pg+=`<span class="pginfo">${v.length}건 중 ${(page-1)*PER+1}–${Math.min(page*PER,v.length)}</span>`;
-  }
+    pg+=`<button class="pg" data-p="${page+1}" ${page===pages?"disabled":""}>다음</button><span class="pginfo">${v.length}건 중 ${(page-1)*PER+1}–${Math.min(page*PER,v.length)}</span>`}
   $("#pager").innerHTML=pg;
 }
-$("#tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(b){cat=b.dataset.c;page=1;render()}});
-["#q","#ind","#sort"].forEach(s=>$(s).addEventListener("input",()=>{page=1;render()}));
-$("#pager").addEventListener("click",e=>{const b=e.target.closest(".pg");if(!b||b.disabled)return;page=+b.dataset.p;render();$("#tabs").scrollIntoView({behavior:"smooth",block:"start"})});
-fetch("files.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{rows=d;render()})
-  .catch(()=>{$("#list").innerHTML='<div class="empty">목록을 불러오지 못했습니다. 잠시 후 다시 열어 주세요.</div>'});
+$("#menu").addEventListener("click",e=>{const b=e.target.closest("button");if(b)setCat(b.dataset.c,b.dataset.c!=="전체")});
+$("#cards").addEventListener("click",e=>{const b=e.target.closest(".card");if(b)setCat(b.dataset.c,true)});
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"){$("#q2").value=$("#q").value;setCat("전체",true)}});
+["#q2","#ind","#sort"].forEach(s=>$(s).addEventListener("input",()=>{page=1;render()}));
+$("#pager").addEventListener("click",e=>{const b=e.target.closest(".pg");if(!b||b.disabled)return;page=+b.dataset.p;render();$("#all").scrollIntoView({behavior:"smooth"})});
+const load=d=>{rows=d;render()};
+fetch("files.json",{cache:"no-store"}).then(r=>r.json()).then(load)
+  .catch(()=>{if(window.PREVIEW_DATA)load(window.PREVIEW_DATA);else $("#list").innerHTML='<div class="empty">목록을 불러오지 못했습니다. 잠시 후 다시 열어 주세요.</div>'});
 }
 </script>
 <script data-goatcounter="https://safetyplum.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
