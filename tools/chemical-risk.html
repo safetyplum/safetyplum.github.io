@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>화학물질 위험성평가</title>
+<meta name="description" content="화학물질 위험성평가(노출수준×유해성) 입력·자동판정·인쇄 기록부">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;
+--bg:light-dark(#f6f8fb,#0f1a22);--panel:light-dark(#ffffff,#16242e);--ink:light-dark(#111111,#eef3f6);
+--sub:light-dark(#4a5560,#a9b6bf);--line:light-dark(#d8e2ea,#2a3d4a);--soft:light-dark(#f1f4f7,#1c2c37);
+--yel:#ffd400;--focus:light-dark(#0b5cad,#7cc0ff);
+--g1:light-dark(#d9f2df,#1f4a2c);--g2:light-dark(#ffe2c2,#5a3a14);--g3:light-dark(#f7d2ef,#55224b);--g4:light-dark(#ffc9c9,#5c1d1d)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Noto Sans KR",system-ui,sans-serif;overflow-x:clip}
+.band{max-width:1180px;margin:0 auto;padding:28px 16px 48px}
+a{color:var(--focus)}
+h1{font-size:clamp(24px,4vw,32px);margin:6px 0 10px;letter-spacing:-.02em}
+.lead{color:var(--sub);margin:0 0 20px;max-width:75ch}
+.back{font-size:14px;text-decoration:none}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 18px}
+@media(max-width:820px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.grid{grid-template-columns:minmax(0,1fr)}.card{padding:16px}}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700;min-width:0}
+label.f small{font-weight:400;color:var(--sub)}
+input,select,textarea,button{font:inherit;font-size:16px;color:var(--ink)}
+input[type=text],input[type=number],input[type=date],select,textarea{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:46px;width:100%}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.sec{font-size:15px;font-weight:700;margin:22px 0 10px;padding-top:16px;border-top:1px dashed var(--line)}
+.sec:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.hide{display:none!important}
+.checks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 18px;font-size:15px}
+@media(max-width:820px){.checks{grid-template-columns:minmax(0,1fr)}}
+.checks label{display:flex;gap:8px;align-items:flex-start}
+.checks input{width:18px;height:18px;margin-top:3px;flex:none}
+.inline{display:flex;gap:8px;align-items:center;font-size:15px;font-weight:400;min-height:46px}
+.inline input{width:18px;height:18px}
+.result{margin-top:18px;border-radius:12px;background:var(--soft);padding:14px 16px;font-size:15px}
+.result .row{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
+.result b.big{font-size:22px}
+.pill{display:inline-block;padding:3px 12px;border-radius:999px;font-weight:700}
+.lv1{background:var(--g1)}.lv2{background:var(--g2)}.lv3{background:var(--g3)}.lv4{background:var(--g4)}
+.why{color:var(--sub);font-size:13px;margin-top:6px}
+.hint{font-size:13px;color:var(--sub);margin-top:6px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:20px}
+.btns div{display:flex;flex-wrap:wrap;gap:10px}
+.btn{min-height:46px;padding:0 20px;border-radius:10px;border:1px solid var(--line);background:var(--panel);font-weight:700;cursor:pointer}
+.btn.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sign{margin-top:20px;border:1px dashed var(--line);border-radius:12px;padding:14px;background:var(--soft)}
+.sign p{margin:0 0 8px;font-size:14px;font-weight:700}
+.appr{border-collapse:collapse;font-size:13px;background:var(--panel)}
+.appr td,.appr th{border:1px solid var(--ink);text-align:center;padding:0}
+.appr th.side{width:26px;writing-mode:vertical-rl;letter-spacing:4px;font-weight:700}
+.appr .ttl{min-width:78px;height:26px}
+.appr .sg{height:52px;cursor:pointer;color:var(--sub)}
+.appr .sg img{max-width:76px;max-height:48px;display:block;margin:auto}
+.appr input{border:0;background:transparent;text-align:center;width:78px;font-size:13px;padding:4px;min-height:0}
+.sigtools{display:flex;gap:12px;justify-content:flex-end;font-size:13px;margin-top:8px}
+.sigtools button{border:0;background:none;color:var(--focus);cursor:pointer;font-size:13px;padding:4px}
+.yearbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:26px 0 10px}
+.tag{background:var(--ink);color:var(--bg);border-radius:8px;padding:6px 12px;font-weight:700;font-size:14px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table.rec{border-collapse:collapse;width:100%;font-size:14px;min-width:860px}
+table.rec th{background:var(--soft);text-align:left;padding:10px;font-weight:700;white-space:nowrap}
+table.rec td{border-top:1px solid var(--line);padding:10px;vertical-align:top}
+table.rec td.c{text-align:center}
+.del{border:0;background:none;color:#c0392b;cursor:pointer;font-size:13px}
+.empty{padding:30px;text-align:center;color:var(--sub)}
+details.crit{margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:14px}
+details.crit summary{cursor:pointer;font-weight:700}
+details.crit table{border-collapse:collapse;margin:8px 0;font-size:13px}
+details.crit td,details.crit th{border:1px solid var(--line);padding:5px 8px}
+.notice{font-size:13px;color:var(--sub);margin-top:16px;line-height:1.7}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--ink);padding:16px;max-width:calc(100vw - 32px)}
+dialog canvas{border:1px solid var(--line);border-radius:8px;background:#fff;touch-action:none;width:min(420px,80vw);height:180px;display:block}
+.printonly{display:none}
+@media print{
+  @page{size:A4 landscape;margin:12mm}
+  :root{color-scheme:light}
+  body{background:#fff;color:#000;font-size:11px}
+  .noprint,.card,.lead,.back,h1.screen,details.crit,.notice,.yearbar .tag{display:none!important}
+  .printonly{display:block}
+  .band{max-width:none;padding:0}
+  .ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+  .ph h2{font-size:20px;margin:0 0 6px}
+  .ph .meta{font-size:12px;line-height:1.8}
+  .tw{border:0;overflow:visible}
+  table.rec{min-width:0;font-size:10px}
+  table.rec th,table.rec td{border:1px solid #000;padding:4px;color:#000}
+  table.rec th{background:#eee!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  table.rec .del{display:none}
+  .pill{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:1px 6px}
+  .appr td,.appr th{border-color:#000}
+  .legend{font-size:10px;margin-top:8px;line-height:1.6}
+}
+</style>
+</head>
+<body>
+<main class="band">
+  <a class="back noprint" href="../">← 안전자료 공유실</a>
+  <h1 class="screen">화학물질 위험성평가 기록부</h1>
+  <p class="lead">공정과 화학물질을 넣으면 노출수준 등급 × 유해성 등급으로 위험도를 바로 계산하고, 관리기준과 감소대책을 함께 기록합니다. 작업환경측정 결과가 있으면 측정값으로, 없으면 하루 취급량과 비산성·휘발성으로 평가합니다. 노출기준 722종이 들어 있어 물질명을 고르면 노출기준이 자동으로 들어갑니다.</p>
+
+  <section class="card noprint" aria-label="입력">
+    <p class="sec">사업장 정보 (인쇄 머리글)</p>
+    <div class="grid">
+      <label class="f">사업장명<input type="text" id="site" placeholder="예: ○○산업(주) 1공장"></label>
+      <label class="f">평가일<input type="date" id="edate"></label>
+      <label class="f">평가자<input type="text" id="who" placeholder="이름"></label>
+    </div>
+
+    <p class="sec">평가 대상</p>
+    <div class="grid">
+      <label class="f">공정명·작업<input type="text" id="proc" placeholder="예: 도장 / 스프레이 도장"></label>
+      <label class="f">화학물질명 <small>목록에서 고르면 노출기준 자동</small><input type="text" id="chem" list="chemlist" placeholder="예: 톨루엔" autocomplete="off"></label>
+      <label class="f">평가 경우
+        <select id="mode">
+          <option value="1">① 작업환경측정 결과 있음 (최근 1년)</option>
+          <option value="2">② 측정결과 없음 · 노출기준 설정 물질</option>
+          <option value="3">③ 측정결과 없음 · 노출기준 미설정 물질</option>
+        </select></label>
+    </div>
+    <p class="hint" id="oelinfo"></p>
+
+    <p class="sec">노출수준</p>
+    <div class="grid" id="m1">
+      <label class="f">측정값 <small>노출기준과 같은 단위</small><input type="number" id="meas" step="any" min="0" placeholder="예: 30"></label>
+      <label class="f">직업병 유소견자<span class="inline"><input type="checkbox" id="sick"> 있음 (노출등급 4)</span></label>
+    </div>
+    <div class="grid hide" id="m23">
+      <label class="f">하루 취급량
+        <select id="amt"><option value="">선택</option><option value="대량">대량 (ton · ㎥ 단위)</option><option value="중량">중량 (㎏ · ℓ 단위)</option><option value="소량">소량 (g · ㎖ 단위)</option></select></label>
+      <label class="f">형태
+        <select id="form"><option value="">선택</option><option value="분진">분진 (고체·분말)</option><option value="액체">액체 (증기)</option></select></label>
+      <label class="f" id="dustbox">비산성
+        <select id="dust"><option value="">선택</option><option value="높음">높음 — 미세·가벼운 분말, 먼지 구름</option><option value="중간">중간 — 결정형 입상, 먼지가 곧 가라앉음</option><option value="낮음">낮음 — 부스러지지 않는 고체</option></select></label>
+      <label class="f hide" id="bpbox">끓는점 (℃)<input type="number" id="bp" step="any" placeholder="MSDS 9번 항목"></label>
+      <label class="f hide" id="tbox">사용온도 (℃) <small>비우면 상온 20℃</small><input type="number" id="temp" step="any" placeholder="20"></label>
+    </div>
+
+    <p class="sec">유해성</p>
+    <div class="grid" id="h12">
+      <label class="f">노출기준 (TWA)<input type="number" id="oel" step="any" min="0" placeholder="자동 또는 직접 입력"></label>
+      <label class="f">단위<select id="unit"><option value="ppm">ppm (가스·증기)</option><option value="mg">㎎/㎥ (분진·미스트)</option></select></label>
+      <label class="f">CMR 물질<span class="inline"><input type="checkbox" id="cmr"> 발암성·변이원성·생식독성 1A·1B·2</span></label>
+    </div>
+    <div class="grid hide" id="h3">
+      <label class="f" style="grid-column:1/-1">MSDS 유해·위험 문구 <small>H-문구(또는 옛 R-문구)를 그대로 붙여 넣기 · 없으면 "없음"</small><input type="text" id="phr" placeholder="예: H225, H304, H315, H336"></label>
+      <label class="f">CMR 물질<span class="inline"><input type="checkbox" id="cmr3"> 발암성·변이원성·생식독성 1A·1B·2</span></label>
+    </div>
+
+    <div class="result" id="res" aria-live="polite">항목을 넣으면 판정이 나옵니다.</div>
+
+    <p class="sec">감소대책 (해당하는 것 모두)</p>
+    <div class="checks" id="acts">
+      <label><input type="checkbox" value="저독성 물질로 대체"> 저독성 물질로 대체</label>
+      <label><input type="checkbox" value="공정 밀폐·자동화"> 공정 밀폐·자동화</label>
+      <label><input type="checkbox" value="국소배기장치 설치·제어풍속 점검"> 국소배기장치 설치·제어풍속 점검</label>
+      <label><input type="checkbox" value="전체환기 개선"> 전체환기 개선</label>
+      <label><input type="checkbox" value="취급량·작업시간 축소"> 취급량·작업시간 축소</label>
+      <label><input type="checkbox" value="MSDS 게시·유해성 교육"> MSDS 게시·유해성 교육 (산안법 제114조)</label>
+      <label><input type="checkbox" value="호흡용 보호구 지급·착용"> 호흡용 보호구 지급·착용</label>
+      <label><input type="checkbox" value="보호장갑·보안경 지급"> 보호장갑·보안경 지급</label>
+      <label><input type="checkbox" value="작업환경측정·특수건강진단"> 작업환경측정·특수건강진단</label>
+    </div>
+    <div class="grid" style="margin-top:12px">
+      <label class="f" style="grid-column:span 2">기타 대책·비고<input type="text" id="etc" placeholder="예: 도장부스 후드 풍속 0.5m/s 이상 유지"></label>
+      <label class="f">담당 / 완료일<input type="text" id="owner" placeholder="예: 김○○ / 12-15"></label>
+    </div>
+
+    <div class="sign">
+      <p>인쇄할 결재란 — 칸 이름·성명을 고치고, 서명 칸을 눌러 서명하세요</p>
+      <div id="apprbox"></div>
+      <div class="sigtools"><button type="button" id="addc">+ 칸</button><button type="button" id="remc">− 칸</button><button type="button" id="resetc">기본으로</button><button type="button" id="togglec">결재란 빼기</button></div>
+    </div>
+
+    <div class="btns">
+      <button class="btn pri" type="button" id="add">기록 추가</button>
+      <div><button class="btn" type="button" id="csv">CSV 저장</button><button class="btn" type="button" id="prt">평가표 인쇄</button></div>
+    </div>
+  </section>
+
+  <div class="printonly ph">
+    <div><h2>화학물질 위험성평가표</h2>
+      <div class="meta">사업장: <span id="p_site"></span><br>평가일: <span id="p_date"></span> · 평가자: <span id="p_who"></span></div></div>
+    <div id="p_appr"></div>
+  </div>
+
+  <div class="yearbar">
+    <span class="tag">평가 기록</span>
+    <span id="summary" style="font-size:14px"></span>
+  </div>
+  <div class="tw">
+    <table class="rec">
+      <thead><tr><th>No</th><th>공정</th><th>화학물질</th><th>평가 경우</th><th>노출 근거</th><th>노출</th><th>유해성</th><th>위험도</th><th>수준 · 관리기준</th><th>감소대책</th><th>담당</th><th class="noprint"></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div class="printonly legend">위험도 = 노출수준 등급(1~4) × 유해성 등급(1~4) · 1~2 경미 / 3~4 상당 / 5~9 중대 / 10~16 허용불가 · 노출기준은 고용노동부 「화학물질 및 물리적 인자의 노출기준」 고시 기준(최신 고시 대조 필요) · 근로자 참여: ____________________</div>
+
+  <details class="crit noprint">
+    <summary>판정 기준 보기</summary>
+    <p><b>노출수준 ①</b> 노출배수(측정값÷노출기준) 1 초과 또는 직업병 유소견자 → 4 · 0.5~1.0 → 3 · 0.1~0.5 미만 → 2 · 0.1 미만 → 1</p>
+    <p><b>노출수준 ②③</b> 하루 취급량 × 비산성·휘발성</p>
+    <table><tr><th></th><th>대량</th><th>중량</th><th>소량</th></tr>
+      <tr><td>분진 높음</td><td>4</td><td>3</td><td>2</td></tr><tr><td>분진 중간</td><td>4</td><td>3</td><td>1</td></tr><tr><td>분진 낮음</td><td>2</td><td>2</td><td>1</td></tr>
+      <tr><td>액체 높음</td><td>4</td><td>3</td><td>2</td></tr><tr><td>액체 중간</td><td>3</td><td>3</td><td>2</td></tr><tr><td>액체 낮음</td><td>2</td><td>2</td><td>1</td></tr></table>
+    <p>휘발성: 상온이면 끓는점 50℃ 미만 높음 · 50~150℃ 중간 · 150℃ 초과 낮음. 그 외 사용온도 T이면 끓는점 &lt; 2T+8.4 높음 · ≤ 6T+4.2 중간 · 그 이상 낮음.</p>
+    <p><b>유해성 ①②</b> CMR → 4 · 분진 ㎎/㎥: &lt;0.01 → 4, ≤0.1 → 3, ≤1 → 2, 그 이상 → 1 · 가스 ppm: &lt;0.5 → 4, ≤5 → 3, ≤50 → 2, 그 이상 → 1</p>
+    <p><b>유해성 ③</b> MSDS 문구 중 가장 높은 등급 — 4: H300 H310 H330 H334 H340 H341 H350 H351 H360 H361 H362 H372 · 3: H301 H311 H314 H317 H318 H331 H335 H370 H373 · 2: H302 H312 H332 H371 · 1: 그 외·문구 없음. (옛 R-문구도 판정)</p>
+    <p><b>관리기준</b> 경미: 유해성정보·주기적 교육 · 상당: 환기장치 효율성 검토·성능개선 · 중대: 작업환경개선 조치기준 평가 · 허용불가: 즉시 종합적 작업환경관리수준평가(전문가 상담)</p>
+  </details>
+  <p class="notice noprint">· 반정량 선별 평가입니다. 중대·허용불가는 작업환경측정 또는 전문가 평가로 이어가세요.<br>· 내장 노출기준표는 2014년 무렵 고시 값입니다. 최신 고용노동부 고시와 대조하세요. H-문구 등급은 HSE COSHH Essentials 대응을 4등급에 맞춘 참고 기준입니다.<br>· 입력한 기록은 이 브라우저에만 저장되고 서버로 보내지 않습니다. 다른 기기로 옮기려면 CSV로 저장하세요.</p>
+</main>
+
+<datalist id="chemlist"></datalist>
+<dialog id="sigdlg"><p style="margin:0 0 8px;font-weight:700">서명</p><canvas id="pad" width="840" height="360"></canvas>
+  <div class="btns" style="margin-top:10px"><button class="btn" type="button" id="sigclr">지우기</button><div><button class="btn" type="button" id="sigx">취소</button><button class="btn pri" type="button" id="sigok">완료</button></div></div></dialog>
+
+<script>
+{
+const OEL=[["가솔린","Gasoline","300","900","500","[8006-61-9] 발암성 1B(가솔린 증기의 직업적 노출에 한함), 생식세포 변이원성 1B"],["개미산","Formic acid","5","9","-","[64-18-6]"],["게르마늄 테트라하이드라이드","Germanium tetrahydride","0.2","0.6","-","[7782-65-2]"],["고형 파라핀 흄","Paraffin wax fume","-","2","-","[8002-74-2]"],["곡물분진","Grain dust","-","4","-",""],["곡분분진","Flour dust(Inhalable fraction)","-","0.5","-","흡입성"],["과산화벤조일","Benzoyl peroxide","-","5","-","[94-36-0]"],["과산화수소","Hydrogen peroxide","1","1.5","-","[7722-84-1] 발암성 2"],["광물털 섬유","Mineral wool fiber","-","10","-","발암성 2(알칼리 산화물 및 알칼리토금속 산화물의 중량비가 18% 이상인 불특정 모양의 인공 유리규산 섬유에 한정함)"],["구리(분진 및 미스트)","Copper(Dust & mist, as Cu)","-","1","-","[7440-50-8]"],["구리(흄)","Copper(Fume)","-","0.1","-","[7440-50-8]"],["규산칼슘","Calcium silicate","-","10","-","[1344-95-2]"],["규조토","Diatomaceous earth","-","10","-",""],["글루타르알데히드","Glutaraldehyde","C0.05","C0.2","-","[111-30-8]"],["글리세린미스트","Glycerin mist","-","10","-","[56-81-5]"],["글리시돌","Glycidol","2","6.1","-","2,3-에폭시-1-프로판올 참조"],["글리콜 모노에틸에테르","Glycol monoethyl ether","5","19","-","2-에톡시에탄올 참조"],["금속가공유(혼합용매추출물)","Metal Working Fluids(as mixed solvent soluble aerosol)","-","0.8","-",""],["기타 분진(산화규소 결정체 1% 이하)","Particulates not otherwise regulated(no more than 1% crystalline silica)","-","10","-","발암성 1A(산화규소 결정체 0.1% 이상에 한함)"],["나프탈렌","Naphthalene","10","50","15","[91-20-3] 발암성 2"],["날레드","Naled","-","3","-","디메틸-1,2-디브로모-2,2-디클로로에틸포스페이트 참조"],["납(무기분진 및 흄)","Lead(Inorganic dust & fumes, as Pb)","-","0.05","-","[7439-92-1] 발암성 2"],["납석","Agalmatolite","-","","",""],["내화성세라믹섬유","Refractory ceramic fibers(Respirable fibers)","-","0.2개/㎤","-","호흡성, 발암성 1B(알칼리 산화물 및 알칼리토금속 산화물의 중량비가 18% 이하인 불특정 모양의 인공 유리규산 섬유에 한정함)"],["노난","Nonane","200","1050","-","[111-84-2]"],["노말-니트로소디메틸아민","n-Nitrosodimethylamine","-","-","-","디메틸니트로소아민 참조"],["2-노말-디부틸아미노에탄올","2-N-Dibutylaminoethanol","2","14","-","[102-81-8] Skin"],["노말-메틸 아닐린","n-Methyl aniline","0.5","2","-","[100-61-8] Skin"],["노말-발레알데히드","n-Valeraldehyde","50","175","-","[110-62-3]"],["노말-부틸 글리시딜에테르","n-Butyl glycidyl ether(BGE)","10","53","-","[2426-08-6] 발암성 2, 생식세포 변이원성 2, Skin"],["노말-부틸 락테이트","n-Butyl lactate","5","25","-","[138-22-7]"],["노말-부틸아크릴레이트","n-Butyl acrylate","2","11","10","[141-32-2]"],["노말-부틸알콜","n-Butyl alcohol(1-Butanol)","C 50","C 150","-","[71-36-3] Skin"],["노말-비닐-2-피롤리돈","N-Vinyl-2-pyrrolidone(NVP)","0.05","-","-","[88-12-0] 발암성 2"],["노말-에틸모르폴린","n-Ethylmorpholine","5","23","-","[100-74-3] Skin"],["노말-이소프로필아닐린","n-Isopropyl aniline","2","10","-","[768-52-5] Skin"],["노말-초산 부틸","n-Butyl acetate","150","710","200","[123-86-4]"],["노말-초산 아밀","n-Amyl acetate","50","-","100","[628-63-7]"],["노말-페닐-베타-나프틸 아민","n-Phenyl-β-naphthyl amine","-","-","-","[135-88-6] 발암성 2"],["노말-프로필 니트레이트","n-Propyl nitrate","25","105","40","[627-13-4]"],["노말-프로필 아세테이트","n-Propyl acetate","200","840","250","[109-60-4]"],["노말-프로필 알콜","n-Propyl alcohol","200","500","250","[71-23-8] Skin"],["노말-헥산","n-Hexane","50","180","-","[110-54-3] 생식독성 2"],["니켈(가용성화합물)","Nickel(Soluble compounds, as Ni)","-","0.1","-","[7440-02-0] 발암성 2"],["니켈(불용성 무기화합물)","Nickel(Insoluble Inorganic compounds, as Ni)","-","0.5","-","[7440-02-0] 발암성 2"],["니켈(금속)","Nickel(Metal)","-","1","-","[7440-02-0] 발암성 2"],["니켈 카르보닐","Nickel carbonyl, as Ni","0.001","0.007","-","[13463-39-3] 발암성 1A, 생식독성 1B"],["니코틴","Nicotine","-","0.5","-","[54-11-5] Skin"],["니트라피린","Nitrapyrin","-","10","-","2-클로로-6-(트리클로로메틸)피리딘 참조"],["니트로글리세린","Nitroglycerin(NG)","0.05","0.5","-","[55-63-0] Skin"],["니트로글리콜","Nitroglycol","0.05","0.3","-","에틸렌 글리콜 디니트레이트 참조"],["4-니트로디페닐","4-Nitrodiphenyl","-","-","-","[92-93-3] 발암성 1B, Skin"],["니트로메탄","Nitromethane","20","50","-","[75-52-5] 발암성 2"],["니트로벤젠","Nitrobenzene","1","5","-","[98-95-3] 발암성 2, 생식독성 2, Skin"],["니트로에탄","Nitroethane","100","310","-","[79-24-3]"],["니트로톨루엔(오르토, 메타, 파라-이성체)","Nitrotoluene(o, m, p-isomers)","2","11","-","[88-72-2] 발암성 1B, 생식세포 변이원성 1B, 생식독성 2, Skin [99-08-1][99-99-0]"],["니트로트리클로로메탄","Nitrotrichloromethane","0.1","0.7","0.3","클로로피크린 참조"],["1-니트로프로판","1-Nitropropane","25","90","-","[108-03-2]"],["2-니트로프로판","2-Nitropropane","C 10","C 35","-","[79-46-9] 발암성 1B"],["대리석","Marble","-","10","-",""],["데미톤","Demeton","0.01","0.1","-","[8065-48-3] Skin"],["데카보란","Decaborane","0.05","0.3","0.15","[17702-41-9] Skin"],["2,4-디","2,4-D(2,4-Dichloro phenoxyacetic acid)","-","10","-","[94-75-7]"],["디글리시딜에테르","Diglycidyl ether(DGE)","0.1","0.5","-","[2238-07-5]"],["디니트로벤젠(모든 이성체)","Dinitrobenzene(all isomers)","0.15","1","-","[528-29-0] Skin [99-65-0][100-25-4] Skin"],["디니트로-오르토-크레졸","Dinitro-o-cresol","-","0.2","-","[534-52-1] 생식세포 변이원성 2, Skin"],["3,5-디니트로-오르토-톨루아미드","3,5-Dinitro-o-toluamide","-","5","-","[148-01-6]"],["디니트로톨루엔","Dinitrotoluene","-","0.2","-","[25321-14-6] 발암성 1B, 생식세포 변이원성 2, 생식독성 2, Skin"],["디메톡시메탄","Dimethoxymethane","1000","3100","-","[109-87-5]"],["디메틸니트로소아민","Dimethylnitrosoamine","-","-","-","[62-75-9] 발암성 1B"],["디메틸-1,2-디브로모-2,2-디클로로에틸포스페이트","Dimethyl-1,2-dibromo-2,2-dichloroethy1 phosphate","-","3","-","[300-76-5] Skin"],["디메틸벤젠(오르토,메타,파라-이성체)","Dimethylbenzene(o,m,p-isomers)","100","435","150","[1330-20-7][95-47-6][108-38-3][106-42-3]"],["디메틸아닐린","Dimethy1aniline(N,N-Dimethylaniline)","5","25","10","[121-69-7] 발암성 2, Skin"],["디메틸아미노벤젠","Dimethy1aminobenzene","0.5","2.5","2","[1300-73-8] 발암성 2, Skin"],["디메틸아민","Dimethy1amine","5","9","15","[124-40-3]"],["디메틸아세트아미드","Dimethyl acetamide","10","35","-","[127-19-5] 생식독성 1B, Skin"],["디메틸 카르바모일클로라이드","Dimethyl carbamoylchloride","-","-","-","[79-44-7] 발암성 1B"],["디메틸포름아미드","Dimethylformamide","10","30","-","[68-12-2] 생식독성 1B, Skin"],["디메틸프탈레이트","Dimethylphthalate","-","5","-","[131-11-3]"],["2,6-디메틸-4-헵타논","2,6-Dimethyl-4-heptanone","25","150","-","디이소부틸케톤 참조"],["1,1-디메틸하이드라진","1,1-Dimethylhydrazine","0.01","0.025","-","[57-14-7] 발암성 1B, Skin"],["디보란","Diborane","0.1","0.1","-","[19287-45-7]"],["디부틸 포스페이트","Dibutyl phosphate","1","5","2","[107-66-4]"],["디부틸 프탈레이트","Dibutyl phthalate","-","5","-","[84-74-2] 생식독성 1B"],["1,2-디브로모에탄","1,2-Dibromoethane","-","-","-","[106-93-4] 발암성 1B, Skin"],["디비닐 벤젠","Divinyl benzene","10","50","-","[1321-74-0]"],["디설피람","Disulfiram","-","2","-","[97-77-8]"],["디설포톤","Disulfoton","-","0.1","-","[298-04-4]"],["디시클로펜타디에닐 철","Dicyclopentadienyl iron","-","10","-","[102-54-5]"],["디시클로펜타디엔","Dicyclopentadiene","5","30","-","[77-73-6]"],["디아니시딘","Dianisidine","-","0.01","-","[119-90-4] 발암성 1B"],["1,2-디아미노에탄","1,2-Diaminoethane","10","25","-","[107-15-3]"],["디아세톤 알콜","Diaceton alcohol","50","240","-","[123-42-2]"],["디아조메탄","Diazomethane","0.2","0.4","-","[334-88-3] 발암성 1B"],["디아지논","Diazinon(Inhalable fraction and vapor)","-","0.01","-","[333-41-5] Skin, 흡입성 및 증기"],["디에탄올아민","Diethanolamine","0.46","2","-","[111-42-2] 발암성 2"],["2-디에틸아미노에탄올","2-Diethylamino ethanol","2","9.6","-","[100-37-8] Skin"],["디에틸아민","Diethylamine","5","15","15","[109-89-7]"],["디에틸 에테르","Diethyl ether","400","1200","500","[60-29-7]"],["디에틸 케톤","Diethyl ketone","200","705","-","[96-22-0]"],["디에틸렌 트리아민","Diethylene triamine","1","4","-","[111-40-0] Skin"],["디에틸프탈레이트","Diethyl phthalate","-","5","-","[84-66-2]"],["디(2-에틸헥실)프탈레이트","Di(2-ethylhexyl)phthalate","-","5","-","[117-81-7] 발암성 2, 생식독성 1B"],["디엘드린","Dieldrin","-","0.25","-","[60-57-1] 발암성 2, Skin"],["디옥사티온","Dioxathion","-","0.2","-","[78-34-2] Skin"],["디옥산","Dioxane(Diethyl dioxide)","20","72","-","[123-91-1] 발암성 2, Skin"],["디우론","Diuron","-","10","-","[330-54-1] 발암성 2"],["디이소부틸케톤","Diisobutyl ketone","25","150","-","[108-83-8]"],["디이소프로필아민","Diisopropylamine","5","20","-","[108-18-9] Skin"],["2,6-디-제3-부틸-파라-크레졸","2,6-Di-tert-butyl-p-cresol","-","2","-","[128-37-0]"],["디-제2-옥틸프탈레이트","Di-sec-octyl phthalate","-","5","-","디(2-에틸헥실)프탈레이트 참조"],["디쿼트","Diquat","-","0.5","-","[231-36-7]"],["디크로토포스","Dicrotophos","-","0.25","-","[141-66-2] Skin"],["디클로로디페닐트리클로로에탄","Dichlorodiphenyltrichloroethane(D.D.T)","-","1","-","[50-29-3] 발암성 2"],["1,1-디클로로-1-니트로에탄","1,1-Dichloro-1-nitroethane","2","10","-","[594-72-9]"],["1,3-디클로로-5,5-디메틸 하이단토인","1,3-Dichloro-5,5-dimethyl hydantoin","-","0.2","-","[118-52-5]"],["디클로로디플루오로메탄","Dichlorodifluoromethane","1000","4950","-","[75-71-8]"],["디클로로메탄","Dichloromethane","50","175","-","[75-09-2] 발암성 2"],["3,3-디클로로벤지딘","3,3-Dichlorobenzidine","-","-","-","[91-94-1] 발암성 1B, Skin"],["디클로로아세트산","Dichloro acetic acid","0.5","2.6","-","[79-43-6] 발암성 2, Skin"],["디클로로아세틸렌","Dichloroacetylene","C 0.1","C 0.4","-","[7572-29-4] 발암성 2"],["1,1-디클로로에탄","1,1-Dichloroethane","100","405","-","[75-34-3]"],["1,2-디클로로에탄","1,2-Dichloroethane","10","40","-","[107-06-2] 발암성 1B"],["1,1-디클로로에틸렌","1,1-Dichloroethylene","5","20","20","[75-35-4] 발암성 2"],["1,2-디클로로에틸렌","1,2-Dichloroethylene","200","790","-","이염화아세틸렌 참조"],["디클로로에틸에테르","Dichloroethylether","5","30","10","[111-44-4] 발암성 2, Skin"],["디클로로테트라플루오로에탄","Dichlorotetrafluoroethane","1000","7000","-","[76-14-2]"],["1,2-디클로로프로판","1,2-Dichloropropane","75","350","110","[78-87-5]"],["디클로로프로펜","Dichloropropene","1","5","-","[542-75-6] 발암성 2, Skin"],["2,2-디클로로프로피온산","2,2-Dichloropropionic acid","1","6","-","[75-99-0]"],["디클로로플루오로메탄","Dichlorofluoromethane","10","40","-","[75-43-4]"],["1,1-디클로로-1-플루오로에탄","1,1-Dichloro-1-fluoro ethane","500","-","-","[1717-00-6]"],["디클로르보스","Dichlorvos","0.01","0.1","-","[62-73-7] Skin"],["디페닐","Diphenyl","0.2","1.5","-","비페닐 참조"],["디페닐메탄 디이소시아네이트","Diphenylmethanediisocyanate","0.005","0.055","-","[101-68-8]"],["디페닐아민","Diphenylamine","-","10","-","[122-39-4]"],["디프로필렌 글리콜 메틸 에테르","Dipropylene glycol methyl ether","100","600","150","[34590-94-8] Skin"],["디프로필 케톤","Dipropyl ketone","50","235","-","[123-19-3]"],["디플루오로디브로모메탄","Difluorodibromomethane","100","860","-","[75-61-6]"],["디하이드록시벤젠","Dihydroxybenzene","-","2","-","[123-31-9] 발암성 2, 생식세포 변이원성 2"],["러버 솔벤트","Rubber solvent(Naphtha)","400","1600","-","[8030-30-6] 발암성 1B, 생식세포 변이원성 1B(벤젠 0.1% 이상인 경우에 한정함)"],["레조시놀","Resorcinol","10","45","20","[108-46-3]"],["로듐금속","Rhodium, Metal","-","0.1","-","[7440-16-6]"],["로듐, 불용성화합물","Rhodium, Insoluble compounds, as Rh","-","1","-","[7440-16-6]"],["로진 열분해산물","Rosin core solder pyrolysis products, as Formaldehyde","-","0.1","-",""],["로테논","Rotenone(Commercial)","-","5","-","[83-79-4]"],["론넬","Ronnel","-","10","-","[299-84-3]"],["루지","Rouge","-","10","-",""],["리튬하이드라이드","Lithium hydride","-","0.025","-","[7580-67-8]"],["린데인","Lindane","-","0.5","-","[58-89-9] 발암성 2, 수유독성, Skin"],["말라티온","Malathion","-","1","-","[121-75-5] Skin"],["망간 및 무기 화합물","Manganese & Inorganic compounds, as Mn","-","1","-","[7439-96-5]"],["망간 시클로펜타디에닐 트리카보닐","Manganese cyclopentadienyl tricarbonyl, as Mn","-","0.1","-","[12079-65-1] Skin"],["망간(흄)","Manganese(Fume)","-","1","-","[7439-96-5]"],["메빈포스","Mevinphos","0.01","0.1","0.03","[7786-34-7] Skin"],["메타크릴 산","Methacrylic acid","20","70","-","[79-41-4]"],["메타-크실렌-알파, 알파-디아민","m-Xylene-α, α´-diamine","-","C 0.1","-","[1477-55-0] Skin"],["메타-톨루이딘","m-Toluidine","2","9","-","[108-44-1] Skin"],["메타-프탈로디니트릴","m-Phthalodinitrile","-","5","-","[626-17-5]"],["메탄올","Methanol","200","260","250","[67-56-1] Skin"],["메탄에티올","Methanethiol","0.5","1","-","[74-93-1]"],["메토밀","Methomyl","-","2.5","-","[16752-77-5]"],["2-메톡시에탄올","2-Methoxyethanol","5","16","-","[109-86-4] 생식독성 1B, Skin"],["2-메톡시에틸아세테이트","2-Methoxyethyl acetate","5","24","-","에틸렌 글리콜 메틸에테르 아세테이트 참조"],["메톡시클로르","Methoxychlor","-","10","-","[72-43-5]"],["4-메톡시페놀","4-Methoxyphenol","-","5","-","[150-76-5]"],["메트리뷰진","Metribuzin","-","5","-","[21087-64-9]"],["메틸 노말-부틸케톤","Methyl n-butylketone","5","20","-","2-헥사논 참조"],["메틸 노말-아밀케톤","Methyl n-amylketone","50","235","-","2-헵타논 참조"],["메틸 데메톤","Methyl demeton","-","0.5","-","[8022-00-2] Skin"],["4,4'-메틸렌디아닐린","4,4'-Methylenedianiline","0.1","0.8","-","[101-77-9] 발암성 1B, 생식세포 변이원성 2, Skin"],["4,4'-메틸렌비스(2-클로로아닐린)","4,4'-Methylenebis(2-chloroaniline)","0.01","0.11","-","[101-14-4] 발암성 1A, Skin"],["메틸렌 비스페닐 이소시아네이트","Methylene bisphenyl isocyanate","0.005","0.055","-","디페닐메탄 디이소시아네이트 참조"],["메틸메타크릴레이트","Methyl methacrylate","50","205","100","[80-62-6]"],["메틸 멀캡탄","Methyl mercaptan","0.5","1","-","메탄에티올 참조"],["메틸삼차 부틸에테르","Methyl tert-butyl ether(MTBE)","50","180","-","[1634-04-4] 발암성 2"],["메틸 2-시아노아크릴레이트","Methyl 2-cyanoacrylate","2","8","4","[137-05-3]"],["2-메틸시클로펜타디에닐 망간트리카르보닐","2-Methylcyclopentadienyl manganese tricarbonyl, as Mn","-","0.2","-","[12108-13-3] Skin"],["메틸시클로헥사놀","Methylcyclohexanol","50","235","-","[25639-42-3]"],["메틸시클로헥산","Methylcyclohexane","400","1600","-","[108-87-2]"],["메틸실리케이트","Methyl silicate","1","6","-","[681-84-5]"],["메틸 아민","Methyl amine","5","6","15","[74-89-5]"],["메틸 아밀알콜","Methyl amylalcohol","25","100","40","[108-11-2] Skin"],["메틸 아세틸렌","Methyl acetylene","1000","1650","1250","[74-99-7]"],["메틸 아세틸렌 프로파디엔 혼합물","Methyl acetylene propadiene mixture(MAPP)","1000","1800","1250",""],["메틸 아크릴레이트","Methyl acrylate","2","7","-","[96-33-3] Skin"],["메틸 아크릴로니트릴","Methyl acrylonitrile","1","3","-","[126-98-7] Skin"],["메틸알","Methylal","1000","3100","-","디메톡시메탄 참조"],["메틸 알콜","Methyl alcohol","200","260","250","메탄올 참조"],["메틸 에틸 케톤","Methyl ethyl ketone(M.E.K)","200","590","300","2-부타논 참조"],["메틸 에틸 케톤 퍼옥사이드","Methyl ethyl ketone peroxide","C 0.2","C 1.5","-","[1338-23-4]"],["메틸 이소부틸 케톤","Methyl isobutyl ketone","50","205","75","헥손 참조"],["메틸 이소시아네이트","Methyl isocyanate","0.02","0.05","-","[624-83-9] 생식독성 2, Skin"],["메틸 이소아밀 카르비놀","Methyl isoamyl carbinol","25","100","40","메틸 아밀알콜 참조"],["메틸 이소아밀 케톤","Methyl isoamyl ketone","50","240","-","[110-12-3]"],["메틸 이소프로필 케톤","Methyl isopropyl ketone","200","705","-","[563-80-4]"],["메틸 클로라이드","Methyl chloride","50","105","100","[74-87-3] 발암성 2"],["메틸 클로로포름","Methyl chloroform","350","1900","450","[71-55-6]"],["메틸 파라티온","Methyl parathion","-","0.2","-","[298-00-0] Skin"],["메틸 포메이트","Methyl formate","100","250","150","[107-31-3]"],["메틸 프로필 케톤","Methyl propyl ketone","200","700","250","[107-87-9]"],["메틸 하이드라진","Methyl hydrazine","0.01","0.025","-","[60-34-4] 발암성 2, Skin"],["5-메틸-3-헵타논","5-Methyl-3-heptanone","25","130","-","에틸 아밀 케톤 참조"],["면분진","Cotton dust, raw","-","0.2","-",""],["모노크로토포스","Monocrotophos","-","0.05","-","[6923-22-4] 생식세포 변이원성 2"],["모노클로로벤젠","Monochlorobenzene","10","46","20","클로로벤젠 참조"],["모르폴린","Morpholine","20","70","30","[110-91-8] Skin"],["목재분진(적삼목)","Wood dust(Western red cedar, Inhalable fraction)","-","0.5","-","흡입성, 발암성 1A"],["목재분진(적삼목외 기타 모든 종)","Wood dust(All other species, Inhalable fraction)","-","1","-","흡입성, 발암성 1A"],["몰리브덴(불용성화합물)","Molybdenum(Insoluble compounds)","-","10","-","[7439-98-7]"],["몰리브덴(불용성화합물)","Molybdenum(Insoluble compounds)(Respirable fraction)","-","5","-","[7439-98-7] 호흡성"],["몰리브덴(수용성화합물)","Molybdeunum(Soluble compounds)","-","0.5","-","[7439-98-7]"],["무수 말레산","Maleic anhydride","0.1","0.4","-","[108-31-6]"],["무수 초산","Acetic anhydride","C 5","C 20","-","[108-24-7]"],["무수 프탈산","Phthalic anhydride","1","6","-","[85-44-9]"],["바륨(가용성화합물)","Barium(Soluble compounds, as Ba)","-","0.5","-","[7440-39-3]"],["백금(가용성염)","Platinum(Soluble salts, as Pt)","-","0.002","-","[7440-06-4]"],["백금(금속)","Platinum(Metal)","-","1","-","[7440-06-4]"],["배노밀","Benomyl","0.8","10","-","[17804-35-2] 발암성 2, 생식세포 변이원성 1B, 생식독성 1B"],["베릴륨 및 그 화합물","Beryllium & Compounds","-","0.002","-","[7440-41-7] 발암성 1A"],["베타-나프틸아민","β-Naphthylamine","-","-","-","[91-59-8] 발암성 1A"],["베타-클로로프렌","β-Chloroprene","10","35","-","2-클로로-1,3-부타디엔 참조"],["베타-프로피오락톤","β-Propiolactone","0.5","1.5","-","[57-57-8] 발암성 1B"],["벤젠","Benzene","1","3","5","[71-43-2] 발암성 1A, 생식세포 변이원성 1B"],["벤조일클로라이드","Benzoyl chloride","-","-","C 0.5","[98-88-4] 발암성 1B"],["벤조트리클로라이드","Benzotrichloride","-","-","C 0.1","[98-07-7] 발암성 1B, Skin"],["벤조 피렌","Benzo(a) pyrene","-","-","-","[50-32-8] 발암성 1A, 생식세포 변이원성 1B, 생식독성 1B"],["벤지딘","Benzidine","-","-","-","[92-87-5] 발암성 1A, Skin"],["2-부타논","2-Butanone","200","590","300","[78-93-3]"],["1,3-부타디엔","1,3-Butadiene","2","4.4","10","[106-99-0] 발암성 1A, 생식세포 변이원성 1B"],["부탄","Butane","800","1900","-","[106-97-8] 발암성 1A, 생식세포 변이원성 1B(부타디엔 0.1% 이상인 경우에 한정함)"],["2-부톡시에탄올","2-Butoxyethanol","20","97","-","[111-76-2] 발암성 2, Skin"],["부탄에티올","Butanethiol","0.5","1.5","-","[109-79-5]"],["부틸 멀캡탄","Butyl mercaptan","0.5","1.5","-","부탄에티올 참조"],["부틸아민","Butylamine","C 5","C 15","-","[109-73-9] Skin"],["2-부틸알콜","sec-Butyl alcohol(2-Butanol)","100","305","150","[78-92-2]"],["3-부틸알콜","tert-Butyl alcohol","100","300","150","[75-65-0]"],["불소","Fluorine","0.1","0.2","-","[7782-41-4]"],["불화수소","Hydrogen fluoride, as F","0.5","-","C 3","[7664-39-3]"],["붕소산 사나트륨염(무수물)","Borates tetrasodium salts(Anhydrous)","-","1","-","[1303-96-4] 생식독성 1B"],["붕소산 사나트륨염(오수화물)","Borates tetrasodium salts(Pentahydrate)","-","1","-","[1303-96-4] 생식독성 1B"],["붕소산 사나트륨염(십수화물)","Borates tetrasodium salts(Decahydrate)","-","5","-","[1303-96-4] 생식독성 1B"],["브로마실","Bromacil","1","10","-","[314-40-9] 발암성 2"],["브로모클로로메탄","Bromochloromethane","200","1050","250","[74-97-5]"],["브로모포롬","Bromoform","0.5","5","-","[75-25-2] 발암성 2, Skin"],["1-브로모프로판","1-Bromopropane","25","125","-","[106-94-5] 생식독성 1B"],["2-브로모프로판","2-Bromopropane","1","5","-","[75-26-3] 생식독성 1A"],["브롬","Bromine","0.1","0.65","0.3","[7726-95-6]"],["브롬화 메틸","Methyl bromide","1","3.9","-","[74-83-9] 생식세포 변이원성 2, Skin"],["브롬화 비닐","Vinyl bromide","0.5","2.2","-","[593-60-2] 발암성 1B"],["브롬화 수소","Hydrogen bromide","C 2","C 6.62","-","[10035-10-6]"],["브롬화 에틸","Ethyl bromide","5","22","-","[74-96-4] 발암성 2"],["브이엠 및 피 나프타","VM & P Naphtha","300","1350","-","[8032-32-4] 발암성 1B, 생식세포 변이원성 1B(벤젠 0.1% 이상인 경우에 한정함)"],["비닐 벤젠","Vinyl benzene","20","85","40","페닐 에틸렌 참조"],["비닐 시클로헥센디옥사이드","Vinyl cyclohexenedioxide","0.1","0.57","-","[106-87-6] 발암성 2, Skin"],["비닐 아세테이트","Vinyl acetate","10","-","15","[108-05-4] 발암성 2"],["비닐 톨루엔","Vinyl toluene","50","240","-","[25013-15-4]"],["비소 및 가용성화합물","Arsenic & Soluble compounds, as As","-","0.01","-","[7440-38-2] 발암성 1A"],["비스-(클로로메틸)에테르","bis-(Chloromethyl)ether","0.001","0.005","-","[542-88-1] 발암성 1A"],["비페닐","Biphenyl","0.2","1.5","-","[92-52-4]"],["사브롬화 아세틸렌","Acetylene tetrabromide","1","15","-","[79-27-6]"],["사브롬화 탄소","Carbon tetrabromide","0.1","1.4","0.3","[558-13-4]"],["사산화 오스뮴","Osmium tetroxide, as Os","0.0002","0.002","0.0006","[20816-12-0]"],["사염화탄소","Carbon tetrachloride","5","30","-","[56-23-5] 발암성 1B, Skin"],["산화규소(결정체 석영)","Silica(Crystalline quartz)(Respirable fraction)","-","0.05","-","[14808-60-7] 발암성 1A, 호흡성"],["산화규소(결정체 크리스토바라이트)","Silica(Crystalline cristobalite)(Respirable fraction)","-","0.05","-","[14464-46-1] 발암성 1A, 호흡성"],["산화규소(결정체 트리디마이트)","Silica(Crystalline tridymite)(Respirable fraction)","-","0.05","-","[15468-32-3] 발암성 1A, 호흡성"],["산화규소(결정체 트리폴리)","Silica(Crystalline tripoli)(Respirable fraction)","-","0.1","-","[1317-95-9] 발암성 1A, 호흡성"],["산화규소(비결정체 규소, 용융된)","Silica(Amorphous silica, fused)(Respirable fraction)","-","0.1","-","[60676-86-0] 호흡성"],["산화규소(비결정체 규조토)","Silica(Amorphous diatomaceous earth)","-","10","-","[61790-53-2]"],["산화규소(비결정체 침전된 규소)","Silica(Amorphous precipitated silica)","-","10","-","[112926-00-8]"],["산화규소(비결정체 실리카겔)","Silica(Amorphous silicagel)","-","10","-","[112926-00-8]"],["산화마그네슘(흄)","Magnesium oxide(Fume)","-","10","-","[1309-48-4]"],["산화 메시틸","Mesityl oxide","15","60","25","[141-79-7]"],["산화 붕소","Boron oxide","-","10","-","[1303-86-2] 생식독성 1B"],["산화아연 분진","Zinc oxide(Respirable fraction)","-","2","-","[1314-13-2] 호흡성"],["산화아연(흄)","Zinc oxide(Fume)","-","5","-","[1314-13-2]"],["산화 알루미늄","Aluminum oxide","-","10","-","알파-알루미나 참조"],["산화 에틸렌","Ethylene oxide","1","2","-","[75-21-8] 발암성 1A, 생식세포 변이원성 1B"],["산화주석 및 무기화합물","Tin oxide & Inorganic compounds except SnH4, as Sn","-","2","-","[7440-31-5]"],["산화철","Iron oxide, as Fe","-","5","-","[1309-37-1]"],["산화철(흄)","Iron oxide(Fume, as Fe)","-","5","-","[1309-37-1]"],["산화카드뮴(제품)","Cadmium oxide(Production)","-","0.05","-","[1306-19-0] 발암성 1A, 생식세포 변이원성 2, 생식독성 2"],["산화카드뮴(흄)","Cadmium oxide(Fume, as Cd)","-","C 0.05","-","[1306-19-0] 발암성 1A, 생식세포 변이원성 2, 생식독성 2"],["산화칼슘","Calcium oxide","-","2","-","[1305-78-8]"],["산화프로필렌","Propylene oxide","2","5","-","1,2-에폭시프로판 참조"],["삼부틸크롬산","tert-Butyl chromate, as CrO3","-","C 0.1","-","[1189-85-1] Skin"],["삼불화붕소","Boron trifluoride","C 1","C 3","-","[7637-07-2]"],["삼불화염소","Chlorine trifluoride","C 0.1","C 0.4","-","[7790-91-2]"],["삼불화질소","Nitrogen trifluoride","10","30","-","[7783-54-2]"],["삼브롬화붕소","Boron tribromide","C 1","C 10","-","[10294-33-4]"],["삼산화 비소(제품)","Arsenic trioxide(Production)","-","-","-","[1327-53-3] 발암성 1A"],["삼산화 안티몬(취급 및 사용물)","Antimony trioxide(Handling & use, as Sb)","-","0.5","-","[1309-64-4] 발암성 1B"],["삼산화 안티몬(제품)","Antimony trioxide(Production)","-","-","-","[1309-64-4] 발암성 1B"],["삼수소화 비소","Arsine","0.005","0.016","-","[7784-42-1] 발암성 1A"],["석고","Gypsum","-","10","-","[7778-18-9]"],["석면(모든 형태)","Asbestos(All forms)","-","0.1개/cm3","-","발암성 1A"],["석탄분진","Coal dust(Respirable fraction)","-","1","-","호흡성"],["석회석","Lime stone","-","10","-",""],["설퍼릴 플루오라이드","Sulfuryl fluoride","5","20","10","[2699-79-8]"],["설퍼 모노클로라이드","Sulfur monochloride","C 1","C 6","-","[10025-67-9]"],["설퍼 테트라플루오라이드","Sulfur tetrafluoride","C 0.1","C 0.4","-","[7783-60-0]"],["설퍼 펜타플루오라이드","Sulfur pentafluoride","C 0.01","C 0.1","-","[5714-22-7]"],["설포텝","Sulfotep","-","0.2","-","[3689-24-5] Skin"],["설프로포스","Sulprofos","-","1","-","[35400-43-2]"],["세손","Sesone","-","10","-","[136-78-7]"],["세슘하이드록시드","Cesium hydroxide","-","2","-","[21351-79-1]"],["셀레늄 화합물","Selenium compounds, as Se","-","0.2","-","[7782-49-2]"],["셀루로우즈","Cellulose(paper fiber)","-","10","-","[9004-34-6]"],["소디움 2,4-디클로로페녹시에틸설페이트","Sodium 2,4-dichlorophenoxyethylsulfate","-","10","-","세손 참조"],["소디움 메타디설파이트","Sodium metadisulfite","-","5","-","[7681-57-4]"],["소디움 비설파이트","Sodium bisulfite","-","5","-","[7631-90-5]"],["소디움 아지이드","Sodium azide","C 0.1","C 0.3","-","[26628-22-8]"],["소디움 풀루오로아세테이트","Sodium fluoroacetate","-","0.05","-","[62-74-8] Skin"],["소석고","Plaster of Paris","-","10","-","[13397-24-5]"],["소우프스톤","Soapstone","-","6","-","[14807-96-6]"],["소우프스톤","Soapstone(Respirable fraction)","-","3","-","[14807-96-6] 호흡성"],["수산화나트륨","Sodium hydroxide","-","C 2","-","[1310-73-2]"],["수산화 칼륨","Potassium hydroxide","-","C 2","-","[1310-58-3]"],["수산화 칼슘","Calcium hydroxide","-","5","-","[1305-62-0]"],["수은(아릴화합물)","Mercury(Aryl compounds)","-","0.1","-","[7439-97-6] Skin"],["수은(아릴 및 알킬 화합물 제외)","Mercury(All formsexcept aryl & alkyl compounds)","-","0.025","-","[7439-97-6] 생식독성 1B, Skin"],["수은(알킬화합물)","Mercury(Alkyl compounds)","-","0.01","-","[7439-97-6] Skin"],["스토다드 용제","Stoddard solvent","100","525","-","[8052-41-3] 발암성 1B, 생식세포 변이원성 1B(벤젠 0.1% 이상인 경우에 한정함)"],["스트론티움크로메이트","Strontium chromate","-","0.0005","-","[7789-06-2] 발암성 1A"],["스트리치닌","Strychnine","-","0.15","-","[57-24-9]"],["스티렌","Styrene","20","85","40","페닐 에틸렌 참조"],["스티빈","Stibine","0.1","0.5","-","[7803-52-3]"],["시스톡스","Systox","0.01","0.1","-","데미톤 참조"],["시아노겐","Cyanogen","10","20","-","[460-19-5]"],["시안아미드","Cyanamide","-","2","-","[420-04-2]"],["시안화 나트륨","Sodium cyanide","-","3","-","[143-33-9]"],["시안화 비닐","Vinyl cyanide","2","4.5","-","아크릴로니트릴 참조"],["시안화 수소","Hydrogen cyanide","C 4.7","C 5","-","[74-90-8] Skin"],["시안화 칼륨","Potassium cyanide","-","5","-","[151-50-8]"],["시안화합물","Cyanides, as CN","-","5","-","Skin"],["시클로나이트","Cyclonite","-","0.5","-","[121-82-4] Skin"],["시클로펜타디엔","Cyclopentadiene","75","200","-","[542-92-7]"],["시클로펜탄","Cyclopentane","600","1720","-","[287-92-3]"],["시클로헥사논","Cyclohexanone","25","100","50","[108-94-1] 발암성 2, Skin"],["시클로헥사놀","Cyclohexanol","50","200","-","[108-93-0] Skin"],["시클로헥산","Cyclohexane","200","700","-","[110-82-7]"],["시클로헥센","Cyclohexene","300","1015","-","[110-83-8]"],["시클로헥실아민","Cyclohexylamine","10","40","-","[108-91-8] 생식독성 2"],["시헥사틴","Cyhexatin","-","5","-","[13121-70-5]"],["실레인","Silane","5","7","-","[7803-62-5]"],["실리콘","Silicon","-","10","-","[7440-21-3]"],["실리콘 카바이드","Silicon carbide","-","10","-","[409-21-2] 발암성 1B[섬유상(수염형태 결정 포함) 물질에 한정함]"],["실리콘 테트라하이드라이드","Silicon tetrahydride","5","7","-","실레인 참조"],["아니시딘(오르토, 파라-이성체)","Anisidine(o, p-isomers)","-","0.5","-","[29191-52-4] Skin"],["아닐린과 아닐린 동족체","Aniline & homologues","2","10","-","[62-53-3] 발암성 2, 생식세포 변이원성 2, Skin"],["4-아미노디페닐","4-Aminodiphenyl","-","-","-","[92-67-1] 발암성 1A, Skin"],["2-아미노에탄올","2-Aminoethanol","3","8","6","[141-43-5]"],["3-아미노-1,2,4-트리아졸(또는 아미트롤)","3-Amino-1,2,4-triazole(or Amitrole)","-","0.2","-","[61-82-5] 발암성 2, 생식독성 2"],["2-아미노피리딘","2-Aminopyridine","0.5","2","-","[504-29-0]"],["아세네이트 연","Lead arsenate, as Pb(AsO4)2","-","0.05","-","[7784-40-9] 발암성 1A, 생식독성 1A"],["아세토니트릴","Acetonitrile","20","33","-","[75-05-8] Skin"],["아세톤","Acetone","500","1188","750","[67-64-1]"],["아세트알데히드","Acetaldehyde","50","90","150","[75-07-0] 발암성 2"],["아세틸살리실산","Acetylsalicylic acid(Aspirin)","-","5","-","[50-78-2]"],["아스팔트 흄(벤젠 추출물, 흡입성)","Asphalt(Petroleum)fumes(as benzene soluble aerosol, Inhalable fraction)","-","0.5","-","[8052-42-4] 발암성 2"],["아연 스테아린산","Zinc stearate","-","10","-","[557-05-1]"],["아진포스 메틸","Azinphos methyl","-","0.2","-","[86-50-0] Skin"],["아크로레인","Acrolein","0.1","0.25","0.3","[107-02-8]"],["아크릴로니트릴","Acrylonitrile","2","4.5","-","[107-13-1] 발암성 1B, Skin"],["아크릴 산","Acrylic acid","2","6","-","[79-10-7]"],["아크릴아미드","Acrylamide","-","0.03","-","[79-06-1] 발암성 1B, 생식세포 변이원성 1B, 생식독성 2, Skin"],["아트라진","Atrazine","-","5","-","[1912-24-9]"],["아황화니켈","Nickel subsulfide","-","0.1","-","[12035-72-2] 발암성 1A, 생식세포 변이원성 2"],["안티몬과 그 화합물","Antimony & compounds, as Sb","-","0.5","-","[7440-36-0]"],["알드린","Aldrin","-","0.25","-","[309-00-2] 발암성 2, Skin"],["알루미늄(가용성 염)","Aluminum(Soluble salts)","-","2","-","[7429-90-5]"],["알루미늄(금속분진)","Aluminum(Metal dust)","-","10","-","[7429-90-5]"],["알루미늄(알킬)","Aluminum(Alkyls)","-","2","-","[7429-90-5]"],["알루미늄(용접 흄)","Aluminum(Welding fumes)","-","5","-","[7429-90-5]"],["알루미늄(피로파우더)","Aluminum(Pyropowders)","-","5","-","[7429-90-5]"],["알릴글리시딜에테르","Allyl glycidyl ether(AGE)","1","4.7","-","[106-92-3] 발암성 2, 생식세포 변이원성 2, 생식독성 2, Skin"],["알릴 알콜","Allyl alcohol","0.5","1.2","4","[107-18-6] Skin"],["알릴프로필 디설파이드","Allylpropyl disulfide","0.5","3","-","[2179-59-1]"],["알파나프틸아민","α-Naphthyl amine","-","0.006","-","[134-32-7] 발암성 2"],["알파-나프틸티오우레아","α-Naphthylthiourea(ANTU)","-","0.3","-","[86-88-4] 발암성 2"],["알파-메틸 스티렌","α-Methyl styrene","50","240","100","[98-83-9]"],["알파-알루미나","α-Alumina","-","10","-","[1344-28-1]"],["알파-클로로아세토페논","α-Chloroacetophenone","0.05","0.3","-","[532-27-4]"],["암모늄 설파메이트","Ammonium sulfamate","-","10","-","[7773-06-0]"],["암모니아","Ammonia","25","18","35","[7664-41-7]"],["액화 석유가스","L.P.G(Liquified petroleum gas)","1000","1800","-","[68476-85-7] 발암성 1A, 생식세포 변이원성 1B(부타디엔 0.1%이상인 경우에 한정함)"],["에머리","Emery","-","10","-","[1302-74-5]"],["에탄 에티올","Ethanethiol","0.5","1","-","[75-08-1]"],["에탄올","Ethanol","1000","1900","-","[64-17-5] 발암성 1A (알코올 음주에 한정함)"],["에탄올아민","Ethanolamine","3","8","6","2-아미노에탄올 참조"],["2-에톡시에탄올","2-Ethoxyethanol","5","19","-","[110-80-5] 생식독성 1B, Skin"],["2-에톡시에틸아세테이트","2-Ethoxyethyl acetate","5","27","-","[111-15-9] 생식독성 1B, Skin"],["에티온","Ethion","-","0.4","-","[563-12-2] Skin"],["에틸렌 글리콜 디니트레이트","Ethylene glycol dinitrate","0.05","0.3","-","[628-96-6] Skin"],["에틸렌 글리콜 모노부틸에테르 아세테이트","Ethylene glycol monobutyl ether acetate","20","131","-","[112-07-2] 발암성 2"],["에틸렌 글리콜 메틸에테르 아세테이트","Ethylene glycol methyl ether acetate","5","24","-","[110-49-6] 생식독성 1B, Skin"],["에틸렌 글리콜(증기 및 미스트)","Ethylene glycol(Vapor and mist)","-","-","C 40","[107-21-1]"],["에틸렌디아민","Ethylenediamine","10","25","-","1,2-디아미노에탄 참조"],["에틸렌이민","Ethylenimine","0.5","1","-","[151-56-4] 발암성 1B, 생식세포 변이원성 1B, Skin"],["에틸렌 클로로하이드린","Ethylene chlorohydrin","C 1","C 3","-","2-클로로에탄올 참조"],["에틸리덴 노보르닌","Ethylidene norbornene","C 5","C 25","-","[16219-75-3]"],["에틸 멀캡탄","Ethyl mercaptan","0.5","1","-","에탄 에티올 참조"],["에틸 벤젠","Ethyl benzene","100","435","125","[100-41-4] 발암성 2"],["에틸 부틸 케톤","Ethyl butyl ketone","50","230","-","[106-35-4]"],["에틸 실리케이트","Ethyl silicate","10","85","-","[78-10-4]"],["에틸 아민","Ethyl amine","5","9","15","[75-04-7]"],["에틸 아밀 케톤","Ethyl amyl ketone","25","130","-","[541-85-5]"],["에틸 아크릴레이트","Ethyl acrylate","5","20","-","[140-88-5] 발암성 2"],["에틸 알콜","Ethyl alcohol","1000","1900","-","에탄올 참조"],["에틸 에테르","Ethyl ether","400","1200","500","디에틸 에테르 참조"],["1,2-에폭시프로판","1,2-Epoxypropane","2","5","-","[75-56-9] 발암성 1B, 생식세포 변이원성 1B"],["2,3-에폭시-1-프로판올","2,3-Epoxy-1-propanol","2","6.1","-","[556-52-5] 발암성 1B, 생식세포 변이원성 2, 생식독성 1B"],["에피클로로히드린","Epichlorohydrin","0.5","1.9","-","1-클로로-2,3-에폭시 프로판 참조"],["엔도설판","Endosulfan","-","0.1","-","[115-29-7] Skin"],["엔드린","Endrin","-","0.1","-","[72-20-8] Skin"],["염소","Chlorine","0.5","1.5","1","[7782-50-5]"],["염소화 비닐리덴","Vinylidene chloride","5","20","20","1,1-디클로로에틸렌 참조"],["염소화 산화디페닐","Chlorinated diphenyloxide","-","0.5","-","[55720-99-5]"],["염소화 캄펜","Chlorinated camphene","-","0.5","-","[8001-35-2] 발암성 2, Skin"],["염화 메틸렌","Methylene chloride","50","175","-","디클로로메탄 참조"],["염화 벤질","Benzyl chloride","1","5","-","[100-44-7] 발암성 1B"],["염화 비닐","Vinyl chloride","1","-","-","클로로에틸렌 참조"],["염화 수소","Hydrogen chloride","1","1.5","2","[7647-01-0]"],["염화 시아노겐","Cyanogen chloride","C 0.3","C 0.6","-","[506-77-4]"],["염화 아연 흄","Zinc chloride fume","-","1","-","[7646-85-7]"],["염화 알릴","Allyl chloride","1","3","2","[107-05-1] 발암성 2, 생식세포 변이원성 2"],["염화 암모늄 흄","Ammonium chloride fume","-","10","-","[12125-02-9]"],["염화 에틸","Ethyl chloride","1000","2600","-","[75-00-3] 발암성 2"],["염화 에틸리덴","Ethylidene chloride","100","405","-","1,1-디클로로에탄 참조"],["염화 티오닐","Thionyl chloride","C 1","C 5","-","[7719-09-7]"],["오르토-2-부틸페놀","o-sec-Butylphenol","5","30","-","[89-72-5] Skin"],["오르토-디클로로벤젠","o-Dichlorobenzene","25","150","50","[95-50-1]"],["오르토-메틸시클로헥사논","o-Methylcyclohexanone","50","230","75","[583-60-8] Skin"],["오르토-클로로벤질리덴","o-Chlorobenzylidene","C 0.05","C 0.4","-","[2698-41-1]"],["오르토-클로로스티렌","o-Chlorostyrene","50","285","75","[2039-87-4]"],["오르토-클로로톨루엔","o-Chlorotoluene","50","250","75","[95-49-8]"],["오르토-톨루이딘","o-Toluidine","2","9","-","[95-53-4] 발암성 1A, Skin"],["오르토-톨리딘","o-Tolidine","-","-","-","[119-93-7] 발암성 1B, Skin"],["오불화 브롬","Bromine pentafluoride","0.1","0.7","-","[7789-30-2]"],["오산화바나듐","Vanadium pentoxide(Respirable fraction or fume)","-","0.05","-","[1314-62-1] 발암성 2, 생식세포 변이원성 2, 생식독성 2, 호흡성 및 흄"],["오카르보닐 철(펜타카르보닐철)","Iron pentacarbonyl, as Fe","0.1","0.8","0.2","[13463-40-6]"],["오존","Ozone","0.08","0.16","0.2","[10028-15-6]"],["옥살산","Oxalic acid","-","1","-","[144-62-7]"],["옥타클로로나프탈렌","Octachloronaphthalene","-","0.1","-","[2234-13-1] Skin"],["옥탄","Octane","300","1450","375","[111-65-9]"],["와파린","Warfarin","-","0.1","-","[81-81-2] 생식독성 1A"],["요오드","Iodine","C 0.1","C 1","-","[7553-56-2]"],["요오드포름","Iodoform","0.6","10","-","[75-47-8]"],["요오드화 메틸","Methyl iodide","2","10","-","[74-88-4] 발암성 2, Skin"],["용접 흄 및 분진","Welding fumes and dust","-","5","-","발암성 2"],["우라늄(가용성 및 불용성 화합물)","Uranium(Soluble & insoluble compounds, as U)","-","0.2","-","[7440-61-1] 발암성 1A"],["운모","Mica(Respirable fraction)","-","3","-","[12001-26-2] 호흡성"],["유리 섬유 분진","Fibrous glass dust","-","5","-",""],["육불화 셀레늄","Selenium hexafluoride, as Se","0.05","0.2","-","[7783-79-1]"],["육불화 텔레늄","Tellurium hexafluoride, as Te","0.02","0.2","-","[7783-80-4]"],["육불화 황","Sulfur hexafluoride","1000","6000","-","[2551-62-4]"],["은(가용성 화합물)","Silver(Soluble compounds, as Ag)","-","0.01","-","[7440-22-4]"],["은(금속)","Silver(Metal)","-","0.1","-","[7440-22-4]"],["이불화산소","Oxygen difluoride","C 0.05","C 0.1","-","[7783-41-7]"],["이브롬화 에틸렌","Etylene dibromide","-","-","-","1,2-디브로모에탄 참조"],["이산화염소","Chlorine dioxide","0.1","0.3","0.3","[10049-04-4]"],["이산화질소","Nitrogen dioxide","3","6","5","[10102-44-0]"],["이산화탄소","Carbon dioxide","5000","9000","30000","[124-38-9]"],["이산화티타늄","Titanium dioxide","-","10","-","[13463-67-7] 발암성 2"],["이산화 황","Sulfur dioxide","2","5","5","[7446-09-5]"],["이소부틸 알콜","Isobutyl alcohol","50","150","-","[78-83-1]"],["이소아밀 알콜","Isoamyl alcohol","100","360","125","[123-51-3]"],["이소옥틸 알콜","Isooctyl alcohol","50","270","-","[26952-21-6] Skin"],["이소포론","Isophorone","C 5","C 25","-","[78-59-1] 발암성 2"],["이소포론 디이소시아네이트","Isophorone diisocyanate","0.005","0.045","-","[4098-71-9] Skin"],["이소프로폭시에탄올","Isopropoxyethanol","25","105","-","[109-59-1]"],["이소프로필 글리시딜 에테르","Isopropyl glycidyl ether(IGE)","50","240","75","[4016-14-2]"],["이소프로필아민","Isopropylamine","5","12","10","[75-31-0]"],["이소프로필 알콜","Isopropyl alcohol","200","480","400","[67-63-0]"],["이소프로필 에테르","Isopropyl ether","250","1025","310","[108-20-3]"],["이염화아세틸렌","Acetylene dichloride","200","790","-","[540-59-0]"],["이염화 에틸렌","Ethylene dichloride","10","40","-","1,2-디클로로에탄 참조"],["이트리움(금속 및 화합물)","Yttrium(Metal & compounds, as Y)","-","1","-","[7440-65-5]"],["이피엔","EPN(Inhalable fraction)","-","0.1","-","[2104-64-5] Skin, 흡입성"],["이황화탄소","Carbon disulfide","10","30","-","[75-15-0] 생식독성 2, Skin"],["인(황색)","Phosphorus(yellow)","-","0.1","-","[7723-14-0]"],["인덴","Indene","10","45","-","[95-13-6]"],["인디움 및 그 화합물","Indium & compounds, as In","-","0.1","-","[7440-74-6]"],["인산","Phosphoric acid","-","1","-","[7664-38-2]"],["일산화질소","Nitric monoxide","25","30","-","[10102-43-9]"],["일산화탄소","Carbon monoxide","30","34","200","[630-08-0] 생식독성 1A"],["자당","Sucrose","-","10","-","[57-50-1]"],["자철광","Magnesite","-","10","-","[546-93-0]"],["전분","Starch","-","10","-","[9005-25-8]"],["주석(금속)","Tin(Metal)","-","2","-","[7440-31-5]"],["주석(유기화합물)","Tin(Organic compounds, as Sn)","-","0.1","-","[7440-31-5] Skin"],["지르코니움 화합물","Zirconium compounds, as Zr","-","5","-","[7440-67-7]"],["질산","Nitric acid","2","5","4","[7697-37-2]"],["철바나듐 분진","Ferrovanadium dust","-","1","-","[12604-58-9]"],["철염(가용성)","Iron salts(Soluble, as Fe)","-","1","-","[7439-89-6]"],["초산","Acetic acid","10","25","15","[64-19-7]"],["초산 2-부틸","sec-Butyl acetate","200","950","-","[105-46-4]"],["초산 3-부틸","tert-Butyl acetate","200","950","-","[540-88-5]"],["초산 2-아밀","sec-Amyl acetate","50","-","100","[626-38-0]"],["초산 2-헥실","sec-Hexyl acetate","50","300","-","[108-84-9]"],["초산 메틸","Methyl acetate","200","610","250","[79-20-9]"],["초산 에틸","Ethyl acetate","400","1400","-","[141-78-6]"],["초산 이소부틸","Isobutyl acetate","150","700","187","[110-19-0]"],["초산 이소아밀","Isoamyl acetate","50","260","100","[123-92-2]"],["초산 이소프로필","Isopropyl acetate","100","420","200","[108-21-4]"],["카드뮴 및 그 화합물","Cadmium and compounds, as Cd","-","0.03","-","[7440-43-9] 발암성 1A, 생식세포 변이원성 2, 생식독성 2, 호흡성"],["카르보닐 클로라이드","Carbonyl chloride","0.1","0.4","-","[75-44-5]"],["카바릴","Carbaryl","-","5","-","[63-25-2] 발암성 2"],["카보푸란","Carbofuran","-","0.1","-","[1563-66-2]"],["카보닐 플루오라이드","Carbonyl fluoride","2","5","5","[353-50-4]"],["카본블랙","Carbon black","-","3.5","-","[1333-86-4] 발암성 2"],["카올린","Kaoline(Respirable fraction)","-","2","-","[1332-58-7] 호흡성"],["카프로락탐(분진)","Caprolactum(Dust)","-","1","-","[105-60-2]"],["카프로락탐(증기)","Caprolactum(Vapor)","5","20","10","[105-60-2]"],["카테콜","Catechol","5","20","-","[120-80-9] 발암성 2"],["칼슘 시안아미드","Calcium cyanamide","-","0.5","-","[156-62-7]"],["캄파(인조)","Camphor(Synthetic)","2","12","3","[76-22-2]"],["캡타폴","Captafol","-","0.1","-","[2425-06-1] 발암성 1B, Skin"],["캡탄","Captan","-","5","-","[133-06-2] 발암성 2"],["케로젠","Kerosene","-","200","-","[8008-20-6] 발암성 2, Skin"],["케텐","Ketene","0.5","0.9","1.5","[463-51-4]"],["코발트(금속 분진 및 흄)","Cobalt(Metal dust & fume)","-","0.02","-","[7440-48-4] 발암성 2"],["코발트 하이드로카르보닐","Cobalt hydrocarbonyl, as Co","-","0.1","-","[16842-03-8]"],["퀴논","Quinone","0.1","0.4","-","파라-벤조퀴논 참조"],["큐멘","Cumene","50","245","-","[98-82-8] Skin"],["코발트 카르보닐","Cobalt carbonyl, as Co","-","0.1","-","[10210-68-1]"],["크레졸(모든 이성체)","Cresol(all isomers)","5","22","-","[1319-77-3] Skin"],["크로밀 클로라이드","Chromyl chloride","0.025","0.15","-","[14977-61-8] 발암성 1A, 생식세포 변이원성 1B"],["크로톤알데히드","Crotonaldehyde","2","6","-","[4170-30-3] 발암성 2, 생식세포 변이원성 2"],["크롬광 가공품(크롬산)","Chromite ore processing(Chromate), as Cr","-","0.05","-","[7440-47-3] 발암성 1A"],["크롬(금속)","Chromium(Metal)","-","0.5","-","[7440-47-3]"],["크롬(6가)화합물(불용성무기화합물)","Chromium(Ⅵ)compounds(Water insoluble inorganic compounds)","-","0.01","-","[18540-29-9] 발암성 1A"],["크롬(6가)화합물(수용성)","Chromium(Ⅵ)compounds(Water soluble)","-","0.05","-","[18540-29-9] 발암성 1A"],["크롬산 연","Lead chromate, as Cr","-","0.012","-","[7758-97-6] 발암성 1A, 생식독성 1A"],["크롬산 연","Lead chromate, as Pb","-","0.05","-","[7758-97-6] 발암성 1A, 생식독성 1A"],["크롬산 아연","Zinc chromate, as Cr","-","0.01","-","[13530-65-9] 발암성 1A"],["크롬(2가)화합물","Chromium(Ⅱ)compounds, as Cr","-","0.5","-","[7440-47-3]"],["크롬(3가)화합물","Chromium(Ⅲ)compounds, as Cr","-","0.5","-","[7440-47-3]"],["크루포메이트","Crufomate","-","5","-","[299-86-5]"],["크리센","Chrysene","-","-","-","[218-01-9] 발암성 1B, 생식세포 변이원성 2"],["크실렌(오르토,메타,파라 이성체)","Xylene(o,m,p-isomers)","100","435","150","디메틸벤젠 참조"],["크실리딘","Xylidine","0.5","2.5","2","디메틸아미노벤젠 참조"],["1-클로로-1-니트로프로판","1-Chloro-1-nitropropane","2","10","-","[600-25-9]"],["클로로디페닐(42% 염소)","Chlorodiphenyl(42% Chlorine)","-","1","-","[53469-21-9] Skin"],["클로로디페닐(54% 염소)","Chlorodiphenyl(54% Chlorine)","-","0.5","-","[11097-69-1] 발암성 2, Skin"],["클로로디플루오로메탄","Chlorodifluoromethane","1000","3500","1250","[75-45-6]"],["클로로메틸 메틸에테르","Chloromethyl methylether","-","-","-","[107-30-2] 발암성 1A"],["클로로벤젠","Chlorobenzene","10","46","20","[108-90-7] 발암성 2"],["2-클로로-1,3-부타디엔","2-Chloro-1,3-butadiene","10","35","-","[126-99-8] 발암성 1B, Skin"],["클로로브로모메탄","Chlorobromomethane","200","1050","250","브로모클로로메탄 참조"],["클로로아세트알데히드","Chloroacetaldehyde","C 1","C 3","-","[107-20-0] 발암성 2"],["클로로아세틸 클로라이드","Chloroacetyl chloride","0.05","0.2","-","[79-04-9]"],["2-클로로에탄올","2-Chloroethanol","C 1","C 3","-","[107-07-3]"],["클로로에틸렌","Chloroethylene","1","-","-","[75-01-4] 발암성 1A"],["1-클로로-2,3-에폭시 프로판","1-Chloro-2,3-epoxy propane","0.5","1.9","-","[106-89-8] 발암성 1B"],["2-클로로-6-(트리클로로메틸)피리딘","2-Chloro-6-(trichloromethyl)pyridine","-","10","-","[1929-82-4]"],["클로로펜타플루오로에탄","Chloropentafluoro ethane","1000","6320","-","[76-15-3]"],["클로로포름","Chloroform","10","50","-","[67-66-3] 발암성 2"],["클로로피크린","Chloropicrin","0.1","0.7","0.3","[76-06-2]"],["클로르단","Chlordane","-","0.5","-","[57-74-9] 발암성 2, Skin"],["클로르피리포스","Chlorpyrifos(Inhalable fraction and vapor)","-","0.1","-","[2921-88-2] Skin, 흡입성 및 증기"],["클로피돌","Clopidol","-","10","-","[2971-90-6]"],["탄산칼슘","Calcium carbonate","-","10","-","[1317-65-3]"],["탄탈륨(금속 및 산화흄)","Tantalum(Metal & oxide fume)","-","5","-","[1314-61-0]"],["탈륨(가용성화합물)","Thallium(Soluble compounds, as Tl)","-","0.1","-","[7440-28-0] Skin"],["터페닐","Terphenyls","C 0.5","C 5","-","[26140-60-3]"],["테레빈유","Turpentine","20","112","-","[8006-64-2]"],["텅스텐(가용성화합물)","Tungsten(Soluble compounds)","-","1","-","[7440-33-7]"],["텅스텐(불용성화합물)","Tungsten(Insoluble compounds)","-","5","-","[7440-33-7]"],["테트라니트로메탄","Tetranitromethane","1","8","-","[509-14-8] 발암성 2"],["테트라메틸 숙시노니트릴","Tetramethyl succinonitrile","0.5","3","-","[3333-52-6] Skin"],["테트라메틸 연","Tetramethyl lead, as Pb","-","0.075","-","[75-74-1] 발암성 2, Skin"],["테트라소디움 피로포스페이트","Tetrasodium pyrophosphate","-","5","-","[7722-88-5]"],["테트라에틸 연","Tetraethyl lead, as Pb","-","0.075","-","[78-00-2] 발암성 2 , Skin"],["테트라클로로나프탈렌","Tetrachloronaphthalene","-","2","-","[1335-88-2]"],["1,1,1,2-테트라클로로-2,2-디플로로에탄","1,1,1,2-Tetrachloro-2,2-difluoroethane","500","4170","-","[76-11-9]"],["1,1,2,2-테트라클로로-1,2-디플로로에탄","1,1,2,2-Tetrachloro-1,2-difluoroethane","500","4170","-","[76-12-0]"],["테트라클로로메탄","Tetrachloromethane","5","30","-","사염화탄소 참조"],["1,1,2,2-테트라클로로에탄","1,1,2,2-Tetrachloroethane","1","7","-","[79-34-5] 발암성 2, Skin"],["테트라클로로에틸렌","Tetrachloroethylene","25","170","100","퍼클로로에틸렌 참조"],["테트라하이드로퓨란","Tetrahydrofuran","50","140","100","[109-99-9] 발암성 2"],["테트릴","Tetryl","-","1.5","-","[479-45-8]"],["텔레늄과 그 화합물","Tellurium & compounds, as Te","-","0.1","-","[13494-80-9]"],["텔루르화 비스무스","Bismuth telluride","-","10","-","[1304-82-1]"],["템포스","Temephos","-","10","-","[3383-96-8]"],["톡사펜","Toxaphene","-","0.5","-","염소화 캄펜 참조"],["톨루엔","Toluene","50","188","150","[108-88-3] 생식독성 2"],["톨루엔-2,4-디이소시아네이트","Toluene-2,4-diisocyanate(TDI)","0.005","0.04","0.02","[584-84-9] 발암성 2"],["톨루엔-2,6-디이소시아네이트","Toluene-2,6-diisocyanate(TDI)","0.005","0.04","0.02","[91-08-7] 발암성 2"],["톨루올","Toluol","50","188","150","톨루엔 참조"],["2,4,6-트리니트로 톨루엔","2,4,6-Trinitrotoluene(TNT)","-","0.1","-","[118-96-7] Skin"],["2,4,6-트리니트로페놀","2,4,6-Trinitrophenol","-","0.1","-","피크린산 참조"],["트리메틸 벤젠","Trimethyl benzene","25","125","-","[25551-13-7]"],["트리메틸아민","Trimethylamine","5","13.2","15","[75-50-3]"],["트리메틸 포스파이트","Trimethyl phosphite","2","10","-","[121-45-9]"],["트리멜리틱 안하이드리드","Trimellitic anhydride","0.005","0.04","-","[552-30-7]"],["트리부틸 포스페이트","Tributyl phosphate","0.2","2.5","-","[126-73-8] 발암성 2"],["트리에틸아민","Triethylamine","2","8.3","4","[121-44-8]"],["트리오르토크레실 포스페이트","Triorthocresyl phosphate","-","0.1","-","[78-30-8] Skin"],["트리클로로나프탈렌","Trichloronaphthalene","-","5","-","[1321-65-9] Skin"],["트리클로로니트로메탄","Trichloronitromethane","0.1","0.7","0.3","클로로피크린 참조"],["트리클로로메탄","Trichloromethane","10","50","-","클로로포름 참조"],["1,2,4-트리클로로벤젠","1,2,4-Trichlorobenzene","C 5","C 40","-","[120-82-1]"],["트리클로로아세트산","Trichloroacetic acid","1","7","-","[76-03-9] 발암성 2"],["1,1,1-트리클로로에탄","1,1,1-Trichloroethane","350","1900","450","메틸 클로로포름 참조"],["1,1,2-트리클로로에탄","1,1,2-Trichloroethane","10","55","-","[79-00-5] 발암성 2, Skin"],["트리클로로에틸렌","Trichloroethylene","50","270","200","[79-01-6] 발암성 1B, 생식세포 변이원성 2"],["1,1,2-트리클로로-1,2,2-트리플루오로에탄","1,1,2-Trichloro-1,2,2-trifluoroethane","1000","7600","1250","[76-13-1]"],["1,2,3-트리클로로프로판","1,2,3-Trichloropropane","10","60","-","[96-18-4] 발암성 1B, 생식독성 1B, Skin"],["트리클로로플루오로메탄","Trichlorofluoromethane","C 1,000","C 5,600","-","플루오로트리클로로메탄 참조"],["트리클로로헥실틴 하이드록사이드","Trichlorohexyltin hydroxide","-","5","-","시헥사틴 참조"],["트리페닐 아민","Triphenyl amine","-","5","-","[603-34-9]"],["트리페닐 포스페이트","Triphenyl phosphate","-","3","-","[115-86-6]"],["트리플루오로 브로모메탄","Trifluoro bromomethane","1000","6100","-","[75-63-8]"],["특수다환식방향족 탄화수소(벤젠에 가용성)","Particulate polycyclicaromatic hydrocarbons(as benzene solubles)","-","0.2","-","발암성 1A~2(믈질의 종류에 따라 발암성 등급 차이가 있음)"],["2,4,5-티","2,4,5-T(2,4,5-Trichlorophenoxy acetic acid)","-","10","-","[93-76-5]"],["티오글리콜산","Thioglicolic acid","1","4","-","[68-11-1] Skin"],["티람","Thiram","-","1","-","[137-26-8] Skin"],["4,4'-티오비스(6-제3-부틸-메타-크레졸)","4,4'-Thiobis(6-tert-butyl-m-cresol)","-","10","-","[96-69-5]"],["티이디피","TEDP","-","0.2","-","설포텝 참조"],["티이피피","TEPP","0.004","0.05","-","[107-49-3] Skin"],["파라-니트로아닐린","p-Nitroaniline","-","3","-","[100-01-6] Skin"],["파라-니트로클로로벤젠","p-Nitrochlorobenzene","0.1","0.6","-","[100-00-5] 발암성 2, 생식세포 변이원성 2, Skin"],["파라-디클로로벤젠","p-Dichlorobenzene","10","60","20","[106-46-7] 발암성 2"],["파라-3-부틸톨루엔","p-tert-Butyltoluene","10","60","15","[98-51-1]"],["파라-벤조퀴논","p-Benzoquinone","0.1","0.4","-","[106-51-4]"],["파라치온","Parathion","-","0.05","-","[56-38-2] Skin"],["파라쿼트","Paraquat(Respirable fraction)","-","0.1","-","[4685-14-7] 호흡성"],["파라-페닐렌디아민","p-Phenylene diamine","-","0.1","-","[106-50-3] Skin"],["파라-톨루이딘","p-Toluidine","2","9","-","[106-49-0] 발암성 2, Skin"],["퍼라이트","Perlite","-","10","-","[93763-70-3]"],["퍼밤","Ferbam","-","10","-","[14484-64-1]"],["퍼클로로메틸 멀캡탄","Perchloromethyl mercaptan","0.1","0.8","-","[594-42-3]"],["퍼클로로에틸렌","Perchloroethylene","25","170","100","[127-18-4] 발암성 1B"],["퍼클로릴 플루오라이드","Perchloryl fluoride","3","14","6","[7616-94-6]"],["페나미포스","Fenamiphos","-","0.1","-","[22224-92-6] Skin"],["페노티아진","Phenothiazine","-","5","-","[92-84-2] Skin"],["페놀","Phenol","5","19","-","[108-95-2] 생식세포 변이원성 2, Skin"],["페닐 글리시딜 에테르","Phenyl glycidyl ether(PGE)","0.8","5","-","[122-60-1] 발암성 1B, 생식세포 변이원성 2, Skin"],["페닐 멀캡탄","Phenyl mercaptan","0.1","0.45","-","[108-98-5] Skin"],["페닐 에테르(증기)","Phenyl ether(Vapor)","1","7","2","[101-84-8]"],["페닐 에틸렌","Phenyl ethylene","20","85","40","[100-42-5] 발암성 2, Skin"],["페닐 포스핀","Phenyl phosphine","C0.05","C0.25","-","[638-21-1]"],["페닐 하이드라진","Phenyl hydrazine","5","20","10","[100-63-0] 발암성 1B, 생식세포 변이원성 2, Skin"],["펜설포티온","Fensulfothion","-","0.1","-","[115-90-2]"],["펜아실 클로라이드","Phenacyl chloride","0.05","0.3","-","알파-클로로아세토페논 참조"],["2-펜타논","2-Pentanone","200","700","250","메틸 프로필 케톤 참조"],["펜타보레인","Pentaborane","0.005","0.01","0.015","[19624-22-7]"],["펜타에리트리톨","Pentaerythritol","-","10","-","[115-77-5]"],["펜타클로로나프탈렌","Pentachloronaphthalene","-","0.5","-","[1321-64-8]"],["펜타클로로페놀","Pentachlorophenol","-","0.5","-","[87-86-5] 발암성 2, Skin"],["펜탄","Pentane","600","1800","750","[109-66-0]"],["펜티온","Fenthion","-","0.2","-","[55-38-9] 생식세포 변이원성 2, Skin"],["포노포스","Fonofos","-","0.1","-","[944-22-9]"],["포레이트","Phorate(Inhalable fraction and vapor)","-","0.05","-","[298-02-2] Skin, 흡입성 및 증기"],["포름산 에틸","Ethyl formate","100","300","-","[109-94-4]"],["포름아미드","Formamide","10","15","-","[75-12-7] 생식독성 1B, Skin"],["포름알데히드","Formaldehyde","0.5","0.75","1","[50-00-0] 발암성 1A"],["포스겐","Phosgene","0.1","0.4","-","카르보닐 클로라이드 참조"],["포스드린","Phosdrin","0.01","0.1","0.03","메빈포스 참조"],["포스포러스 옥시클로라이드","Phosphorus oxychloride","0.1","0.6","0.5","[10025-87-3]"],["포스포러스 트리클로라이드","Phosphorus trichloride","0.2","1.5","0.5","[7719-12-2]"],["포스포러스 펜타설파이드","Phosphorus pentasulfide","-","1","-","[1314-80-3]"],["포스포러스 펜타클로라이드","Phosphorus pentachloride","0.1","1","-","[10026-13-8]"],["포스핀","Phosphine","0.3","0.4","1","[7803-51-2]"],["포틀랜드 시멘트","Portland cement","-","10","-","[65997-15-1]"],["푸르푸랄","Furfural","2","8","-","[98-01-1] 발암성 2, Skin"],["푸르푸릴 알콜","Furfuryl alcohol","10","40","15","[98-00-0] Skin"],["프로파르길 알콜","Propargyl alcohol","1","2","-","[107-19-7] Skin"],["프로판 설톤","Propane sultone","-","-","-","[1120-71-4] 발암성 1B"],["프로폭서","Propoxur","-","0.5","-","[114-26-1] 발암성 2"],["프로피온산","Propionic acid","10","30","15","[79-09-4]"],["프로핀","Propyne","1000","1650","1250","메틸 아세틸렌 참조"],["프로필렌 글리콜 디니트레이트","Propylene glycoldinitrate","0.05","0.3","-","[6423-43-4] Skin"],["프로필렌 글리콜 모노메틸 에테르","Propylene glycolmonomethyl ether","100","360","150","[107-98-2]"],["프로필렌 디클로라이드","Propylene dichloride","75","350","110","1,2-디클로로프로판 참조"],["프로필렌 이민","Propylene imine","2","5","-","[75-55-8] 발암성 1B, Skin"],["플루오로트리클로로메탄","Fluorotrichloromethane","C 1,000","C 5,600","-","[75-69-4]"],["플루오라이드","Fluorides, as F","-","2.5","-","[7681-49-4]"],["피레트럼","Pyrethrum","-","5","-","[8003-34-7]"],["피로카테콜","Pyrocatechol","5","20","-","카테콜 참조"],["피리딘","Pyridine","2","6","-","[110-86-1] 발암성 2"],["피크린산","Picric acid","-","0.1","-","[88-89-1] Skin"],["피클로람","Picloram","-","10","-","[1918-02-1]"],["피페라진 디하이드로클로라이드","Piperazine dihydrochloride","-","5","-","[142-64-3] 생식독성 2"],["핀돈","Pindone(Pival)","-","0.1","-","[83-26-1]"],["하이드라진","Hydrazine","0.05","0.06","-","[302-01-2] 발암성 1B, Skin"],["하이드로겐 셀레늄","Hydrogen selenide, as Se","0.05","0.2","-","[7783-07-5]"],["하이드로게네이티드 터페닐","Hydrogenated terphenyls","0.5","5","-","[61788-32-7]"],["하이드로퀴논","Hydroquinone","-","2","-","디하이드록시벤젠 참조"],["4-하이드록시-4-메틸-2-펜타논","4-Hydroxy-4-methyl-2-pentanone","50","240","-","디아세톤 알콜 참조"],["2-하이드록시 프로필 아크릴레이트","2-Hydroxypropyl acrylate","0.5","3","-","[999-61-1] Skin"],["하프니움","Hafnium","-","0.5","-","[7440-58-6]"],["2-헥사논","2-Hexanone","5","20","-","[591-78-6] 생식독성 2"],["헥사메틸 포스포르아미드","Hexamethyl phosphoramide","-","-","-","[680-31-9] 발암성 1B, 생식세포 변이원성 1B, Skin"],["헥사메틸렌 디이소시아네이트","Hexamethylene diisocyanate","0.005","0.034","-","[822-06-0]"],["헥사클로로나프탈렌","Hexachloronaphthalene","-","0.2","-","[1335-87-1] Skin"],["헥사클로로부타디엔","Hexachlorobutadiene","0.02","0.24","-","[87-68-3] 발암성 2, Skin"],["헥사클로로시클로펜타디엔","Hexachlorocyclopentadiene","0.01","0.1","-","[77-47-4]"],["헥사클로로에탄","Hexachloroethane","1","10","-","[67-72-1] 발암성 2"],["헥사플루오로아세톤","Hexafluoroacetone","0.1","0.7","-","[684-16-2] Skin"],["헥산(다른 이성체)","Hexane(other isomer)","500","1800","1000",""],["헥손","Hexone","50","205","75","[108-10-1] 발암성 2"],["헥실렌글리콜","Hexylene glycol","C 25","C 125","-","[107-41-5]"],["2-헵타논","2-Heptanone","50","235","-","[110-43-0]"],["3-헵타논","3-Heptanone","50","230","-","에틸 부틸 케톤 참조"],["헵타클로르","Heptachlor","-","0.5","-","[76-44-8] 발암성 2, Skin"],["헵탄","Heptane","400","1600","500","[142-82-5]"],["활석(석면 불포함)","Talc(Containing no asbestos fibers)","-","2","-","[14807-96-6] 호흡성"],["활석(석면 포함)","Talc(Containing asbestos fibers)","-","0.1개/cm3","-","석면 참조"],["활성탄","Activated carbon","-","5","-",""],["황산","Sulfuric acid","-","0.2","-","[7664-93-9] 발암성 1A(강산 Mist에 한정함)"],["황산 디메틸","Dimethy1 sulfate","0.1","0.5","-","[77-78-1] 발암성 1B, 생식세포 변이원성 2, Skin"],["황산암모늄","Ammonium Sulfate","-","10","-",""],["황화광","Sulfide ore","-","2","-",""],["황화니켈(흄 및 분진)","Nickel sulfide roasting(Fume & dust, as Ni)","-","1","-","[16812-54-7] 발암성 1A, 생식세포 변이원성 2"],["황화수소","Hydrogen sulfide","10","14","15","[7783-06-4]"],["휘발성 콜타르피치(벤젠에 가용물)","Coal tar pitch volatiles(Benzene solubles)","-","0.2","-","[65996-93-2] 발암성 1A"],["흑연(천연)","Graphite(Natural, Respirable fraction)","-","2","-","[7782-42-5] 호흡성"],["흑연(합성)","Graphite(Synthetic, Respirable fraction)","-","2","-","[7782-42-5] 호흡성"]]; // [국문명, 영문명, TWA ppm, TWA mg, STEL ppm, 비고]
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const KEY="chemRisk.v1";
+let rows=store.get(KEY+".rows",[]);
+const MAP=new Map(OEL.map(r=>[r[0],r]));
+$("#chemlist").innerHTML=OEL.map(r=>`<option value="${esc(r[0])}">${esc(r[1])}</option>`).join("");
+const today=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const head=store.get(KEY+".head",{});
+$("#site").value=head.site||"";$("#who").value=head.who||"";$("#edate").value=head.date||today;
+["site","who","edate"].forEach(id=>$("#"+id).addEventListener("input",()=>store.set(KEY+".head",{site:$("#site").value,who:$("#who").value,date:$("#edate").value})));
+
+const num=v=>{if(v==null)return NaN;const n=parseFloat(String(v).replace(/^C/,""));return isFinite(n)&&/^C?[\d.]+$/.test(String(v).trim())?n:NaN};
+const isCMR=note=>/발암성|변이원성|생식독성/.test(note||"");
+const MAT={"분진높음":[4,3,2],"분진중간":[4,3,1],"분진낮음":[2,2,1],"액체높음":[4,3,2],"액체중간":[3,3,2],"액체낮음":[2,2,1]};
+const AMT={"대량":0,"중량":1,"소량":2};
+const PH={4:"H300 H310 H330 H334 H340 H341 H350 H351 H360 H361 H362 H372 R26 R27 R28 R40 R42 R45 R46 R49 R60 R61 R62 R63 R48/R23 R48/R24 R48/R25",
+  3:"H301 H311 H314 H317 H318 H331 H335 H370 H373 R23 R24 R25 R34 R35 R37 R41 R43 R48",
+  2:"H302 H312 H332 H371 R20 R21 R22"};
+const LV=[[2,"경미한 위험","근로자에게 유해성정보 및 주기적 안전보건교육의 제공",1],[4,"상당한 위험","현재 설치되어 있는 환기장치의 효율성 검토 및 성능개선 실시",2],
+  [9,"중대한 위험","현행법상 작업환경개선을 위한 조치기준에 대한 평가 실시",3],[16,"허용불가 위험","즉각적으로 종합적인 작업환경관리수준평가 실시(전문가 상담)",4]];
+
+function onChem(){
+  const r=MAP.get($("#chem").value.trim());
+  if(!r){$("#oelinfo").textContent=$("#chem").value.trim()?"노출기준표에 없는 물질입니다 → ③ 노출기준 미설정 물질로 평가하거나 최신 고시를 확인해 직접 입력하세요.":"";return}
+  const p=num(r[2]),m=num(r[3]);
+  if(isFinite(p)){$("#oel").value=p;$("#unit").value="ppm"}else if(isFinite(m)){$("#oel").value=m;$("#unit").value="mg"}else $("#oel").value="";
+  $("#cmr").checked=$("#cmr3").checked=isCMR(r[5]);
+  if($("#mode").value==="3")$("#mode").value="2";
+  $("#oelinfo").textContent=`노출기준표: ${r[1]} · TWA ${r[2]} ppm / ${r[3]} ㎎/㎥ · STEL ${r[4]} ppm · ${r[5]||""}`;
+  layout();calc();
+}
+function layout(){
+  const m=$("#mode").value,f=$("#form").value;
+  $("#m1").classList.toggle("hide",m!=="1");$("#m23").classList.toggle("hide",m==="1");
+  $("#h12").classList.toggle("hide",m==="3");$("#h3").classList.toggle("hide",m!=="3");
+  $("#dustbox").classList.toggle("hide",f==="액체");$("#bpbox").classList.toggle("hide",f!=="액체");$("#tbox").classList.toggle("hide",f!=="액체");
+}
+function volatility(){
+  const bp=parseFloat($("#bp").value),t=$("#temp").value===""?20:parseFloat($("#temp").value);
+  if(!isFinite(bp))return "";
+  if(t===20)return bp<50?"높음":bp<=150?"중간":"낮음";
+  return bp<2*t+8.4?"높음":bp<=6*t+4.2?"중간":"낮음";
+}
+function phraseGrade(txt){
+  const s=String(txt||"").toUpperCase().replace(/\//g,"/R");
+  if(!s.trim())return null;
+  for(const g of [4,3,2])if(PH[g].split(" ").some(c=>s.includes(c)))return g;
+  return 1;
+}
+function evaluate(){
+  const m=$("#mode").value,why=[];let E=null,H=null;
+  if(m==="1"){
+    const meas=parseFloat($("#meas").value),oel=parseFloat($("#oel").value);
+    if($("#sick").checked){E=4;why.push("직업병 유소견자 → 노출 4")}
+    else if(isFinite(meas)&&oel>0){const x=meas/oel;E=x>1?4:x>=.5?3:x>=.1?2:1;why.push(`노출배수 ${x.toFixed(2)}`)}
+  }else{
+    const f=$("#form").value,a=$("#amt").value,v=f==="분진"?$("#dust").value:f==="액체"?volatility():"";
+    if(f&&a&&v){E=MAT[f+v][AMT[a]];why.push(`${a} · ${f} ${f==="액체"?"휘발성":"비산성"} ${v}`)}
+  }
+  if(m==="3"){
+    if($("#cmr3").checked){H=4;why.push("CMR → 유해성 4")}
+    else{H=phraseGrade($("#phr").value);if(H)why.push("MSDS 문구 기준")}
+  }else{
+    const oel=parseFloat($("#oel").value),u=$("#unit").value;
+    if($("#cmr").checked){H=4;why.push("CMR → 유해성 4")}
+    else if(oel>0){H=u==="ppm"?(oel<.5?4:oel<=5?3:oel<=50?2:1):(oel<.01?4:oel<=.1?3:oel<=1?2:1);why.push(`TWA ${oel} ${u==="ppm"?"ppm":"㎎/㎥"}`)}
+  }
+  const R=E&&H?E*H:null,L=R?LV.find(l=>R<=l[0]):null;
+  return {E,H,R,L,why};
+}
+function calc(){
+  const {E,H,R,L,why}=evaluate();
+  if(!R){$("#res").innerHTML=`노출등급 <b>${E??"–"}</b> · 유해성등급 <b>${H??"–"}</b> — 빈 항목을 채우면 위험도가 나옵니다.`;return}
+  $("#res").innerHTML=`<div class="row"><span>노출등급 <b class="big">${E}</b></span><span>× 유해성등급 <b class="big">${H}</b></span><span>= 위험도 <b class="big">${R}</b></span><span class="pill lv${L[3]}">${L[1]}</span></div>
+    <div style="margin-top:6px">관리기준: ${esc(L[2])}</div><div class="why">근거: ${esc(why.join(" · "))}</div>`;
+}
+document.querySelector(".card").addEventListener("input",e=>{if(e.target.id==="chem")onChem();layout();calc()});
+$("#chem").addEventListener("change",onChem);
+
+const MODE={"1":"① 측정결과","2":"② 노출기준 물질","3":"③ 노출기준 없음"};
+$("#add").addEventListener("click",()=>{
+  const chem=$("#chem").value.trim();
+  if(!chem){alert("화학물질명을 입력하세요.");$("#chem").focus();return}
+  const {E,H,R,L,why}=evaluate();
+  if(!R){alert("노출등급과 유해성등급을 판정할 항목을 모두 채우세요.");return}
+  const acts=[...document.querySelectorAll("#acts input:checked")].map(i=>i.value);
+  if($("#etc").value.trim())acts.push($("#etc").value.trim());
+  rows.push({proc:$("#proc").value.trim(),chem,mode:$("#mode").value,why:why.join(" · "),E,H,R,lv:L[1],lvn:L[3],std:L[2],acts:acts.join(", "),owner:$("#owner").value.trim(),at:new Date().toISOString()});
+  store.set(KEY+".rows",rows);render();
+  ["chem","meas","phr","bp","temp","etc","owner","oel"].forEach(id=>$("#"+id).value="");
+  ["sick","cmr","cmr3"].forEach(id=>$("#"+id).checked=false);
+  document.querySelectorAll("#acts input").forEach(i=>i.checked=false);
+  $("#oelinfo").textContent="";calc();$("#chem").focus();
+});
+function render(){
+  const cnt=[0,0,0,0,0];rows.forEach(r=>cnt[r.lvn]++);
+  $("#summary").textContent=`기록 ${rows.length}건 · 허용불가 ${cnt[4]} · 중대 ${cnt[3]} · 상당 ${cnt[2]} · 경미 ${cnt[1]}`;
+  $("#rows").innerHTML=rows.length?rows.map((r,i)=>`<tr><td class="c">${i+1}</td><td>${esc(r.proc)}</td><td>${esc(r.chem)}</td><td>${MODE[r.mode]}</td><td>${esc(r.why)}</td>
+    <td class="c">${r.E}</td><td class="c">${r.H}</td><td class="c"><b>${r.R}</b></td><td><span class="pill lv${r.lvn}">${esc(r.lv)}</span><br>${esc(r.std)}</td><td>${esc(r.acts)}</td><td>${esc(r.owner)}</td>
+    <td class="noprint"><button class="del" data-i="${i}" type="button">삭제</button></td></tr>`).join("")
+    :`<tr><td colspan="12" class="empty">아직 기록이 없습니다. 위에서 입력하고 「기록 추가」를 누르세요.</td></tr>`;
+}
+$("#rows").addEventListener("click",e=>{const b=e.target.closest(".del");if(!b)return;if(!confirm("이 기록을 지울까요?"))return;rows.splice(+b.dataset.i,1);store.set(KEY+".rows",rows);render()});
+$("#csv").addEventListener("click",()=>{
+  if(!rows.length){alert("저장할 기록이 없습니다.");return}
+  const h=["No","공정","화학물질","평가경우","노출근거","노출등급","유해성등급","위험도","위험도수준","관리기준","감소대책","담당"];
+  const q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
+  const body=rows.map((r,i)=>[i+1,r.proc,r.chem,MODE[r.mode],r.why,r.E,r.H,r.R,r.lv,r.std,r.acts,r.owner].map(q).join(","));
+  const blob=new Blob(["﻿"+[h.map(q).join(","),...body].join("\r\n")],{type:"text/csv"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`화학물질_위험성평가_${$("#edate").value||today}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+});
+
+// 결재란
+const DEF={on:true,cols:[{t:"담당",n:"",s:""},{t:"검토",n:"",s:""},{t:"승인",n:"",s:""}]};
+let ap=store.get(KEY+".appr",structuredClone(DEF));
+function apHTML(edit){
+  return `<table class="appr"><tr><th class="side" rowspan="3">결재</th>${ap.cols.map((c,i)=>`<td class="ttl">${edit?`<input data-k="t" data-i="${i}" value="${esc(c.t)}" aria-label="칸 이름">`:esc(c.t)}</td>`).join("")}</tr>
+    <tr>${ap.cols.map((c,i)=>`<td class="sg" data-i="${i}">${c.s?`<img src="${c.s}" alt="서명">`:edit?"서명":""}</td>`).join("")}</tr>
+    <tr>${ap.cols.map((c,i)=>`<td>${edit?`<input data-k="n" data-i="${i}" value="${esc(c.n)}" placeholder="성명" aria-label="성명">`:esc(c.n)}</td>`).join("")}</tr></table>`;
+}
+function apRender(){
+  $("#apprbox").innerHTML=ap.on?apHTML(true):'<span class="hint">결재란을 넣지 않습니다.</span>';
+  $("#togglec").textContent=ap.on?"결재란 빼기":"결재란 넣기";
+  $("#p_appr").innerHTML=ap.on?apHTML(false):"";store.set(KEY+".appr",ap);
+}
+$("#apprbox").addEventListener("input",e=>{const t=e.target;if(t.dataset.k){ap.cols[+t.dataset.i][t.dataset.k]=t.value;store.set(KEY+".appr",ap);$("#p_appr").innerHTML=apHTML(false)}});
+$("#addc").onclick=()=>{if(ap.cols.length<6){ap.cols.push({t:"확인",n:"",s:""});apRender()}};
+$("#remc").onclick=()=>{if(ap.cols.length>1){ap.cols.pop();apRender()}};
+$("#resetc").onclick=()=>{ap=structuredClone(DEF);apRender()};
+$("#togglec").onclick=()=>{ap.on=!ap.on;apRender()};
+// 서명 패드
+const dlg=$("#sigdlg"),pad=$("#pad"),ctx=pad.getContext("2d");let sigI=-1,drawing=false,inked=false;
+$("#apprbox").addEventListener("click",e=>{const c=e.target.closest(".sg");if(!c)return;sigI=+c.dataset.i;ctx.clearRect(0,0,pad.width,pad.height);inked=false;dlg.showModal()});
+const pt=e=>{const r=pad.getBoundingClientRect();return[(e.clientX-r.left)*pad.width/r.width,(e.clientY-r.top)*pad.height/r.height]};
+pad.addEventListener("pointerdown",e=>{drawing=true;pad.setPointerCapture(e.pointerId);ctx.beginPath();ctx.moveTo(...pt(e))});
+pad.addEventListener("pointermove",e=>{if(!drawing)return;ctx.lineWidth=6;ctx.lineCap="round";ctx.strokeStyle="#111";ctx.lineTo(...pt(e));ctx.stroke();inked=true});
+pad.addEventListener("pointerup",()=>drawing=false);
+$("#sigclr").onclick=()=>{ctx.clearRect(0,0,pad.width,pad.height);inked=false};
+$("#sigx").onclick=()=>dlg.close();
+$("#sigok").onclick=()=>{ap.cols[sigI].s=inked?pad.toDataURL("image/png"):"";dlg.close();apRender()};
+
+$("#prt").addEventListener("click",()=>{
+  $("#p_site").textContent=$("#site").value||"________________";$("#p_date").textContent=$("#edate").value;$("#p_who").textContent=$("#who").value||"________";
+  window.print();
+});
+layout();calc();render();apRender();
+}
+</script>
+</body>
+</html>
