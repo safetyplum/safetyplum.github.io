@@ -75,6 +75,7 @@ footer{font-size:13px;color:var(--sub);line-height:1.7}
 <script>
 {
 const CATS=["법령 · 중처법","화학물질 위험성평가","위험성평가 · JSA","유해위험방지계획서","교육자료","특별교육","점검표 · 서식","사고사례","기타"];
+const KEEP=["화학물질 위험성평가","위험성평가 · JSA"]; // 자료가 0건이어도 항상 보이는 탭
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let rows=[],cat="전체";
@@ -82,7 +83,7 @@ const mq=window.matchMedia("(max-width:600px)");let PER=mq.matches?10:20,page=1;
 mq.addEventListener("change",()=>{PER=mq.matches?10:20;page=1;render()});
 function render(){
   const n=c=>c==="전체"?rows.length:rows.filter(r=>r.category===c).length;
-  $("#tabs").innerHTML=["전체",...CATS].filter(c=>c==="전체"||c===cat||n(c)>0).map(c=>`<button class="tab" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(c)}<small>${n(c)}</small></button>`).join("");
+  $("#tabs").innerHTML=["전체",...CATS].filter(c=>c==="전체"||c===cat||KEEP.includes(c)||n(c)>0).map(c=>`<button class="tab" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(c)}<small>${n(c)}</small></button>`).join("");
   const q=$("#q").value.trim().toLowerCase(),ind=$("#ind").value;
   let v=rows.filter(r=>(cat==="전체"||r.category===cat)&&(!ind||r.industry===ind)&&(!q||(r.title+" "+(r.desc||"")).toLowerCase().includes(q)));
   v.sort($("#sort").value==="name"?(a,b)=>a.title.localeCompare(b.title,"ko"):(a,b)=>(b.date||"").localeCompare(a.date||""));
