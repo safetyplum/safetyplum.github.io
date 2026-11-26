@@ -87,7 +87,7 @@ function render(){
   const q=$("#q").value.trim().toLowerCase(),ind=$("#ind").value;
   let v=rows.filter(r=>(cat==="전체"||r.category===cat)&&(!ind||r.industry===ind)&&(!q||(r.title+" "+(r.desc||"")).toLowerCase().includes(q)));
   v.sort($("#sort").value==="name"?(a,b)=>a.title.localeCompare(b.title,"ko"):(a,b)=>(b.date||"").localeCompare(a.date||""));
-  $("#cnt").textContent=rows.length+"건";
+  {const tools=rows.filter(r=>r.type==="웹도구").length;$("#cnt").textContent=(rows.length-tools)+"건"+(tools?" · 웹도구 "+tools+"개":"")}
   const pages=Math.max(1,Math.ceil(v.length/PER));if(page>pages)page=pages;
   const show=v.slice((page-1)*PER,page*PER);
   $("#list").innerHTML=show.length?show.map(r=>`<div class="row"><div class="kind">${esc(r.type||"파일")}</div><div>
